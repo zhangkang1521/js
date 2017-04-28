@@ -67,7 +67,7 @@ console.log(sub1 instanceof SuperType); // false
 // console.log(sub1);
 // console.log(sub2);*/
 
-/** ☆☆☆ Combination Inheritance ,很好的解决了上述两个问题，每个实例都有独立的属性，共用的方法 */
+/** ☆☆☆ Combination Inheritance ,很好的解决了上述两个问题，每个实例都有独立的属性，共用的方法 ，但存在protoType中重复属性问题 */
 
 /*function SuperType(name) {
     this.name = name;
@@ -95,20 +95,30 @@ console.log(sub2.sayName())
 // console.log(sub1 instanceof Object);*/
 
 /** Prototypal Inheritance */
-function object(o) {
-    function F() {}
-    F.prototype = o;
-    return new F();
-}
-
-var person = {
-    name: "zk",
-    friends: ["fangjun", "junjian"]
-};
-
-// var p1 = object(person);
-// var p1 = Object.create(person); //效果同上面的object方法
-// var p2 = Object.create(person);
+// function object(o) {
+//     function F() {}
+//     F.prototype = o;
+//     return new F();
+// }
+//
+// function SuperType(name) {
+//     this.name = name;
+//     this.colors = ["red", "blue", "green"];
+// }
+// SuperType.prototype.sayName = function () {
+//     return this.name;
+// };
+//
+//
+// var person = {
+//     name: "zk",
+//     friends: ["fangjun", "junjian"]
+// };
+//
+// var p1 = object(SuperType);
+// var p2 = object(person);
+// // var p1 = Object.create(person); //效果同上面的object方法
+// // var p2 = Object.create(person);
 // p1.friends.push("wangwei");
 // p2.friends.push("yancheng");
 // console.log(person);
@@ -136,7 +146,7 @@ var person = {
 
 /** Parasitic Inheritance */
 
-function createAnother(original) {
+/*function createAnother(original) {
     var clone = object(original);
     clone.sayHi = function () {
         return "hi";
@@ -145,5 +155,48 @@ function createAnother(original) {
 }
 
 var anotherPerson = createAnother(person);
-console.log(anotherPerson);
+console.log(anotherPerson);*/
+
+/** Parasitic Combination Inheritance */
+
+
+
+function SuperType(name) {
+    this.name = name;
+    this.colors = ["red", "blue", "green"];
+}
+SuperType.prototype.sayName = function () {
+    return this.name;
+};
+
+function SubType(name, age) {
+    SuperType.call(this, name);
+    this.age = age;
+}
+
+inheritPrototype(SubType, SuperType);
+
+SubType.prototype.sayAge = function () {
+    return this.age;
+};
+
+var sub1 = new SubType("zk", 25);
+var sub2 = new SubType("zy", 16);
+sub2.colors.push("black");
+console.log(sub1);
+console.log(sub2);
+
+function inheritPrototype(subType, superType) {
+    function F() {}
+    F.prototype = superType.prototype;
+    subType.prototype = new F();
+    subType.prototype.constructor = subType;
+}
+
+console.log(sub1 instanceof SubType);
+console.log(sub1 instanceof SuperType);
+console.log(sub1 instanceof Object);
+console.log(sub1.sayName());
+console.log(sub1.sayAge());
+console.log(SubType.prototype);
 
