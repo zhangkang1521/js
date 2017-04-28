@@ -157,7 +157,7 @@ console.log(sub2.sayName())
 var anotherPerson = createAnother(person);
 console.log(anotherPerson);*/
 
-/** Parasitic Combination Inheritance */
+/** Parasitic Combination Inheritance，此种方式最好，解决了prototype赋值为instance时，多余属性的问题 */
 
 
 
@@ -189,7 +189,7 @@ console.log(sub2);
 function inheritPrototype(subType, superType) {
     function F() {}
     F.prototype = superType.prototype;
-    subType.prototype = new F();
+    subType.prototype = new F(); // 创建一个prototype的instance，并赋值给SubType。prototype
     subType.prototype.constructor = subType;
 }
 
