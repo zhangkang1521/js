@@ -15,7 +15,13 @@ function test() {
     console.log(topPos);
 }*/
 
-var pageWidth = window.innerWidth;
+var pageWidth = window.innerWidth; // 浏览器内部一块
 var pageHeight = window.innerHeight;
 console.log(pageWidth, pageHeight);
-console.log(window.outerWidth, window.outerHeight);
+console.log(window.outerWidth, window.outerHeight); // 整个浏览器窗口
+// IE8及以下
+console.log(document.documentElement.clientHeight);
+// console.log(document.body.clientHeight);
+console.log(document.compatMode);
+
+window.resizeTo(100, 100);
