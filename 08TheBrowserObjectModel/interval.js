@@ -19,6 +19,7 @@ function incrementNumber() {
 intervalId = setInterval(incrementNumber, 500);*/
 
 
+// 最佳实践，用setTimeout取代setInterval
 var num = 0;
 var max = 10;
 var intervalId = null;
