@@ -5,8 +5,8 @@
 //     console.log(prop, navigator[prop]);
 // }
 
-
-// console.log(navigator.plugins);
+/** 插件检测 */
+/*// console.log(navigator.plugins);
 // 判断是否含有插件，不兼容IE
 function hasPlugin(name) {
     name = name.toLowerCase();
@@ -50,5 +50,4 @@ function hasXX() {
 }
 
 console.log(hasFlash());
-console.log(hasXX());
-
+console.log(hasXX());*/
