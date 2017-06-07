@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC>
+<html>
+	<head>
+		<title>hello,js</title>
+	</head>
+	<body>
+		<div>chapter 10, The Document Object Model</div>
+		<div id="myDiv" style="border: 1px solid red"> &nbsp;<div id="b1">b1</div><div id="b2">b2</div> </div>
+		<div id="myDiv2" title="myDiv tooltip" class="border pl5" my="shit" style="border: 1px solid green" onclick="alert('do not click me')">myDiv2 content</div>
+	<!--	<div id="username">a2</div>-->
+
+		<input type="text" name="username">
+
+		<img src="/img/01.jpg" name="img1">
+		<img src="/img/01.jpg" name="img2">
+
+		<form id="form1">
+			<input type="checkbox" name="color" value="red">
+			<input type="checkbox" name="color" value="green">
+			<input type="checkbox" name="color" value="blue">
+		</form>
+		<form id="form2">
+
+		</form>
+
+		<a href="https://www.baidu.com" name="baidu">baidu</a>
+		<ul id="myList">
+			<li>item1</li>
+			<li>item2</li>
+			<li>item3</li>
+			<li>
+				<ul>
+					<li>s1</li>
+					<li>s2</li>
+				</ul>
+			</li>
+		</ul>
+		<ul id="myList2">
+
+		</ul>
+		<div id="myText">I am a text node!</div>
+		<div id="myComment"><!-- I am a comment --></div>
+		<div id="myCDATA"><![CDATA[I am a CDATA!]]></div>
+
+		<script>
+			// document.write("<script>alert('xx')<\/script>");
+			// 页面加载完成后调用，覆盖了整个页面
+//			window.onload = function () {
+//				document.write('hello,world');
+//            }
+		</script>
+		<noscript>
+			<p>This page requires a JavaScript-enabled browser.</p>
+		</noscript>
+	</body>
+	<!--<script  src="./node.js"></script>-->
+	<!--<script  src="./node-manipulate.js"></script>-->
+	<!--<script  src="./document.js"></script>-->
+	<!--<script  src="./element.js"></script>-->
+	<script  src="./text-node.js"></script>
+</html>
