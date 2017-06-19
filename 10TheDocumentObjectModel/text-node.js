@@ -60,3 +60,5 @@ var textNode = myText.firstChild;
 // var a = element.getAttributeNode("align");
 // console.log(element.attributes['align'].nodeType);
 // console.log(a.nodeType);
+
+console.log('test dynamic script');

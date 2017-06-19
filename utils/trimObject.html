@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+
+
+    /**
+     * 递归地将对象中的所有属性左右两边空格去除掉
+     * 可以在前台发送请求前调用，避免后台出现类似于字符串" 123 "映射成int报错
+     * @param obj
+     */
+    function trimObject(obj) {
+        for (var item in obj) {
+            if (typeof obj[item] == 'string') {
+                obj[item] = obj[item].trim();
+            } else if (typeof obj[item] == 'object') {
+                trimObject(obj[item]);
+            }
+        }
+    }
+
+
+    var value = {
+        a: 12,
+        b: " 23 ",
+        c: {
+            cc: " shit ",
+            dd: 22
+        },
+        d: [" 12 ", " arr "]
+    };
+    trimObject(value);
+    console.log(value);
+</script>
+</html>
