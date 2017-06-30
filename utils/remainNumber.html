@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+    /**
+     * 去除字符串中的字母特殊字符，仅留下数字，且不超过Long
+     * 用于数字输入框
+     * @param str
+     * @returns {*}
+     */
+    function remainNumber(str) {
+        var result;
+        if(str && typeof str=='string') {
+            result = str.replace(/[\D]+/g, "");
+            var LEN = 18;
+            if(result.length > LEN) {
+                result = result.substr(0, LEN);
+            }
+        } else {
+            result = str;
+        }
+        return result;
+    }
+
+    console.log(remainNumber("abcd!@#$1234asdf"));
+    console.log(remainNumber("abcd!@#$123z4sdf"));
+    console.log(remainNumber(""));
+    console.log(remainNumber(null));
+    console.log(remainNumber(123));
+    console.log(remainNumber("abc"));
+    console.log(remainNumber("2349857aa239045723049578"));
+</script>
+</html>
