@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>focus</title>
+
+</head>
+<body>
+    <input type="text" id="a"/>
+    <input type="text" id="b"/>
+</body>
+<script>
+    var a = document.getElementById("a");
+        a.focus();
+    console.log(document.activeElement);
+    console.log(document.hasFocus());
+</script>
+</html>

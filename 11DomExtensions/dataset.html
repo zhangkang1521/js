@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>custom data attribute</title>
+</head>
+<body>
+    <div id="myDiv" data-myname="zk" data-appId="123" hello="ss"></div>
+</body>
+<script>
+    /** 以 data- 开头的 */
+    var div = document.getElementById("myDiv");
+    console.log(div.dataset);
+    console.log(div.dataset.myname);
+    div.dataset.myname = "zy";
+    console.log(div.dataset);
+</script>
+</html>

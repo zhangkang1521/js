@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>children</title>
+</head>
+<body>
+<div id="content">
+    <!-- comment -->
+    <p>This is a <stong>paragraph</stong> with a list following it.</p>
+    <ul>
+        <li>item1</li>
+        <li>item2</li>
+        <li>item3</li>
+    </ul>
+</div>
+</body>
+<script>
+    var content = document.getElementById("content"); // 所有浏览器均不返回text node,ie8及以下会返回comment
+    console.log(content.children);
+    console.log(content.childNodes);
+</script>
+</html>

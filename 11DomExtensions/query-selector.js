@@ -23,4 +23,7 @@ console.log(myDiv.webkitMatchesSelector); // chrome
 console.log(myDiv.webkitMatchesSelector("#zk"));*/
 
 
-
+/** 子孙结点 */
+var myChild = document.querySelector("#myChild");
+console.log(myChild.firstChild); // IE9以下不返回空白的text node
+console.log(myChild.firstElementChild);

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>memory and performance</title>
+</head>
+<body>
+    <ul id="test"></ul>
+</body>
+<script>
+    var ul = document.getElementById("test");
+
+    /** innerHTML 频繁调取有性能问题*/
+//    var i;
+//    for(i=0; i < 1000; i++) {
+//        ul.innerHTML += '<li>'+i+'</li>';
+//    }
+    /** 一次性显示 */
+//    var str = '',i;
+//    for(i=0; i < 1000; i++) {
+//        str += '<li>'+i+'</li>';
+//    }
+//    ul.innerHTML = str;
+</script>
+</html>

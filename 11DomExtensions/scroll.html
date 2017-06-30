@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>scroll</title>
+    <script>
+        function _top() {
+            var myDiv = document.getElementById("myDiv2");
+//            myDiv.scrollIntoView();
+            myDiv.focus(); // 获得焦点，屏幕会滚动到该元素可见
+        }
+    </script>
+</head>
+<body>
+<input id="myDiv1">myDiv1</input>
+<div style="background: blue; height: 600px"></div>
+<input id="myDiv2">myDiv2</input>
+<div style="background: red; height: 600px"></div>
+<input id="myDiv3">myDiv3</input>
+<div style="background: green; height: 600px"></div>
+<button onclick="_top()">top</button>
+</body>
+
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>the insertAdjacentHTML() method</title>
+</head>
+<body>
+    <div>
+        <div>a</div>
+        <div id="myDiv">b</div>
+        <div>c</div>
+    </div>
+</body>
+<script>
+    var div = document.getElementById("myDiv");
+    var node = '<div>hello</div>';
+    // previous sibling
+    div.insertAdjacentHTML('beforebegin', '<div>before begin</div>');
+    // first child
+    div.insertAdjacentHTML('afterbegin', '<div>after begin</div>');
+    // last child
+    div.insertAdjacentHTML('beforeend', '<div>before end</div>');
+    // next sibling
+    div.insertAdjacentHTML('afterend', '<div>after end</div>');
+</script>
+</html>
