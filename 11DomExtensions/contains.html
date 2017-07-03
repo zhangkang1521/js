@@ -5,10 +5,44 @@
     <title>contains</title>
 </head>
 <body>
-
+    <div id="content">
+        <!-- comment -->
+        <p id="p">This is a <stong>paragraph</stong> with a list following it.</p>
+        <ul>
+            <li id="item1">item1</li>
+            <li>item2</li>
+            <li>item3</li>
+        </ul>
+    </div>
+    <div id="myDiv"></div>
 </body>
 <script>
-    console.log(document.documentElement.contains(document.body));
+    //console.log(document.documentElement.contains(document.body));
+    var content = document.getElementById("content");
+    var p = document.getElementById("p");
+    var myDiv = document.getElementById("myDiv");
+    var item1 = document.getElementById("item1");
+
+    /** 方法1：直接使用contains方法，浏览器都支持 */
+//    console.log(content.contains(item1));
+
+    /** 方法2：位置mask */
+    var result = content.compareDocumentPosition(item1);
+//    console.log(item1.compareDocumentPosition(content));
+//    console.log(!!(20 & 16));
+//    console.log(!!(result & 16));
+
+    /** 方法3：遍历document tree */
+    function contains(refNode, otherNode) {
+    	for(var node=otherNode.parentNode; node!=null; node=node.parentNode) {
+    		if(node == refNode) {
+    			return true;
+            }
+        }
+        return false;
+    }
+
+    console.log(contains(content, myDiv));
 
 </script>
 </html>

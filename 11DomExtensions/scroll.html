@@ -6,8 +6,9 @@
     <script>
         function _top() {
             var myDiv = document.getElementById("myDiv2");
-//            myDiv.scrollIntoView();
-            myDiv.focus(); // 获得焦点，屏幕会滚动到该元素可见
+            myDiv.scrollIntoView(); // 所有浏览器都支持，一般都用这个
+//            myDiv.scrollIntoViewIfNeeded(); // only chrome and safari
+//            myDiv.focus(); // 获得焦点，屏幕会滚动到该元素可见
         }
     </script>
 </head>
