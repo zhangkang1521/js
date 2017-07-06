@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>check</title>
+    <script>
+	    // chrome always return true,不可信
+        console.log("Core2.0", document.implementation.hasFeature("Core", "2.0"));
+        console.log("Core3.0", document.implementation.hasFeature("Core", "3.0"));
+        console.log("HTML2.0", document.implementation.hasFeature("HTML", "2.0"));
+        console.log("Views2.0", document.implementation.hasFeature("Views", "2.0"));
+        console.log("XML2.0", document.implementation.hasFeature("XML", "2.0"));
+        console.log("Traversal2.0", document.implementation.hasFeature("Traversal", "2.0")); // ie9+ support
+        console.log("XXX", document.implementation.hasFeature("XXX", "XXX"));
+    </script>
+</head>
+<body>
+
+</body>
+</html>

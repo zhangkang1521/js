@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>scrollDimension</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <div id="myDiv" style="background-color: gray;width: 200px; height: 300px; padding: 3px;margin: 30px;border: 2px solid red;overflow: scroll" >
+        ===========================================================================
+        是岁十月之望，步自雪堂（1），将归于临皋（2）。二客从予，过黄泥之坂（3）。霜露既降，木叶（4）尽脱。人影在地，仰见明月，顾而乐之，行歌相答（5）。
+        　　已而（6）叹曰：“有客无酒，有酒无肴，月白风清，如此良夜何（7）？”客曰：“今者薄暮（8），举网得鱼，巨口细鳞，状如松江之鲈（9）。顾安所得酒乎（10）？”归而谋诸妇（11）。妇曰：“我有斗（12）酒，藏之久矣，以待子不时之须（13）。”
+        　　于是携酒与鱼，复游于赤壁之下（14）。江流有声，断岸千尺（15），山高月小，水落石出。曾日月之几何，而江山不可复识矣（16）！予乃摄衣（17）而上，履巉岩（18），披蒙茸（19），踞（20）虎豹，登虬龙（21），攀栖鹘（22）之危巢，俯冯夷之幽宫（23）。盖二客不能从焉。划然长啸（24），草木震动，山鸣谷应，风起水涌。予亦（25）悄然（26）而悲，肃然（27）而恐，凛乎其不可留（28）也。反（29）而登舟，放（30）乎中流，听其所止而休焉（31）。
+        　　时夜将半，四顾寂寥（32）。适有孤鹤，横江东来（33）。翅如车轮，玄裳缟衣（34），戛然（35）长鸣，掠（36）予舟而西也。须臾客去，予亦就睡（37）。梦一道士，羽衣蹁跹（38），过临皋之下，揖予（39）而言曰：“赤壁之游乐乎？”问其姓名，俯（40）而不答。“呜呼！噫嘻（41）！我知之矣。畴昔之夜（42），飞鸣而过我（43）者，非子也邪（44）？”道士顾（45）笑，予亦惊寤（46）。开户视之，不见其处。
+    </div>
+    <button type="button" onclick="scrollToTop()">top</button>
+</div>
+</body>
+<script>
+	var myDiv = document.getElementById("myDiv");
+//	console.log(myDiv.clientHeight); // height + padding = 300 + 2*3
+//	console.log(myDiv.clientWidth); // height + padding = 300 + 2*3
+//
+//	console.log(myDiv.scrollHeight);
+//	console.log(myDiv.scrollWidth);
+
+    /** 不同浏览器行为不同 建议取 Math.max() */
+//	console.log(document.documentElement.clientHeight);
+//	console.log(document.documentElement.scrollHeight);
+    
+    function scrollToTop() {
+//		console.log(myDiv.scrollTop);
+        myDiv.scrollTop = 0;
+        myDiv.scrollLeft = 0;
+	}
+
+</script>
+</html>

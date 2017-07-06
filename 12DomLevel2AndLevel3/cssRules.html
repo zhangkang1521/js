@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>cssRules</title>
+    <style>
+        #myDiv {
+            background-color: blue;
+            width: 200px;
+            height: 100px;
+        }
+    </style>
+</head>
+<body>
+    <div id="myDiv">hello</div>
+</body>
+<script>
+    var sheet = document.styleSheets[0];
+    var rules = sheet.cssRules || sheet.rules;
+    console.log(rules);
+    var rule = rules[0];
+//    rule.style.backgroundColor = 'red'; // 改变样式
+
+//    sheet.insertRule("body {background-color: silver}", 0);
+//    sheet.addRule("body", "{background-color: silver}", 0); // ie8
+
+    sheet.deleteRule(0);
+//    sheet.removeRule(0); // ie8
+</script>
+</html>

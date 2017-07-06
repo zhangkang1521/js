@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>setUserData</title>
+    <script>
+        var div = document.createElement("div");
+        div.setUserData("name", "zk", function () {
+
+        });
+        var value = document.body.getUserData("name");
+        console.log(value);
+    </script>
+</head>
+<body>
+
+</body>
+</html>

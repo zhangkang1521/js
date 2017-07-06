@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>computedStyle</title>
+    <style type="text/css">
+        #myDiv {
+            background-color: blue;
+            width: 100px;
+            height: 200px;
+        }
+    </style>
+</head>
+<body>
+    <div id="myDiv" style="background-color: red; border: 1px solid black">test</div>
+</body>
+<script>
+    var myDiv = document.getElementById("myDiv");
+    var computedStyle = document.defaultView.getComputedStyle(myDiv, null);
+//    console.log(computedStyle.backgroundColor);
+//    console.log(computedStyle.width);
+//    console.log(computedStyle.height);
+//    console.log(computedStyle.border); // rollup properties
+//    console.log(computedStyle.borderLeftWidth);
+
+    console.log(computedStyle.visibility);
+
+    // ie
+//    var currentStyle = myDiv.currentStyle;
+//    console.log(currentStyle.backgroundColor);
+//    console.log(currentStyle.width);
+//    console.log(currentStyle.height);
+//    console.log(currentStyle.border); // rollup properties
+//    console.log(currentStyle.borderLeftWidth);
+//
+//    console.log(currentStyle.visibility);
+
+//    console.log(myDiv.style.backgroundColor);
+//    console.log(myDiv.style.width);
+//    console.log(myDiv.style.height);
+//    console.log(myDiv.style.border);
+</script>
+</html>

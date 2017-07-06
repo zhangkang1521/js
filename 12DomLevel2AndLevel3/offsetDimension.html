@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>offsetDimension</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <div>
+    <div id="myDiv" style="background-color: gray;width: 200px; height: 300px; padding: 3px;margin: 30px;border: 2px solid red;">test</div>
+    </div>
+</body>
+<script>
+    var myDiv = document.getElementById("myDiv");
+    console.log(myDiv.offsetLeft); // left border -> left border
+    console.log(myDiv.offsetHeight); // height + padding + border = 300 + 2*2 + 3*2
+    console.log(myDiv.offsetParent);
+    console.log(myDiv.clientHeight); // height + padding = 300 + 2*3
+    console.log(document.compatMode);
+
+    function getViewPort() {
+        if(document.compatMode == 'BackCompat') { // IE6
+        	return {
+        		width: document.body.clientWidth,
+                height: document.body.clientHeight
+            }
+        } else {
+        	return {
+        		width: document.documentElement.clientWidth,
+                height: document.documentElement.clientHeight
+            }
+        }
+    }
+
+    console.log(getViewPort());
+</script>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>access element style</title>
+    <style>
+        #myDiv {
+            background: green;
+        }
+    </style>
+</head>
+<body>
+    <div id="myDiv" style="background-color: red;width:20px">test</div>
+</body>
+<script>
+    var myDiv = document.getElementById("myDiv");
+//    console.log(myDiv.style);
+    console.log(myDiv.style.backgroundColor);
+//    myDiv.style.background = 'red';
+//    console.log(myDiv.style.cssText);
+
+
+//    for(var i=0; i<myDiv.style.length; i++) {
+//    	var prop = myDiv.style[i];
+//    	var value = myDiv.style.getPropertyValue(prop);
+//	    console.log(prop);
+//	    console.log(value);
+//    }
+
+//    myDiv.style.removeProperty("background-color");
+
+</script>
+</html>
