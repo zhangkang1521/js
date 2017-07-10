@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>range2</title>
+</head>
+<body>
+    <p id="p1"><b>Hello</b> world!</p>
+</body>
+<script>
+    var p1 = document.getElementById("p1");
+    var helloNode = p1.firstChild.firstChild;
+    var worldNode = p1.lastChild;
+    var range = document.createRange();
+    range.setStart(helloNode, 2);
+    range.setEnd(worldNode, 3);
+    console.log(range);
+
+//    range.deleteContents();
+//    var content = range.extractContents();
+//    var content = range.cloneContents();
+//    document.body.appendChild(content);
+
+//    var span = document.createElement("span");
+//    span.style.color = "red";
+//    span.appendChild(document.createTextNode("inserted text"));
+//    range.insertNode(span);
+    var range2 = document.createRange();
+    range2.selectNode(helloNode);
+    var span = document.createElement("span");
+    span.style.backgroundColor = "yellow";
+    range2.surroundContents(span);
+</script>
+</html>

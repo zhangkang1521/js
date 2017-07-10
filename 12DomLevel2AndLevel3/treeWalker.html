@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>treeWalker</title>
+</head>
+<body>
+    <div id="div1">
+        <p><b>Hello</b> world!</p>
+        <ul>
+            <li>item1</li>
+            <li>item2</li>
+            <li>item3</li>
+        </ul>
+    </div>
+</body>
+<script>
+    // treeWalker比nodeIterator更灵活， ie8及以下不支持
+	var filter = function (node) {
+		return node.tagName.toLowerCase() == 'li' ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_SKIP;
+	}
+	var div = document.getElementById("div1");
+	var walker = document.createTreeWalker(div, NodeFilter.SHOW_ELEMENT, null, false);
+//	var walker = document.createNodeIterator(div,  NodeFilter.SHOW_ELEMENT, filter, false);
+	console.log(walker.currentNode);
+	walker.firstChild();
+	console.log(walker.currentNode);
+	walker.nextSibling();
+
+	var node = walker.firstChild();
+	while(node !== null) {
+		console.log(node.tagName);
+		node = walker.nextSibling()
+	}
+</script>
+</html>
