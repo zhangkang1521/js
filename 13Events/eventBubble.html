@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>事件冒泡</title>
+</head>
+<body onclick="alert(3)" style="background-color: green">
+    <div onclick="alert(2)" style="background-color: yellow;height: 100px; width: 100px">
+        <input type="button" value="click me" onclick="alert(1);event.stopPropagation();" style="background-color: red; height: 50px; width: 50px; margin: 10px 10px">xx</input>
+    </div>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>eventHandleIE</title>
+</head>
+<body>
+    <form>
+        <input type="button" id="test" value="test"/>
+    </form>
+</body>
+<script>
+    // ie8
+    var test = document.getElementById("test");
+    test.attachEvent("onclick", f1);
+    test.attachEvent("onclick", f2);
+    function f1() {
+//	    console.log(a);
+	    console.log(this == window);
+	    console.log('111');
+    }
+    function f2() {
+	    console.log('222');
+	    test.detachEvent("onclick", f1);
+    }
+</script>
+</html>

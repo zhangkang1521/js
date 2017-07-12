@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>eventHandle</title>
+</head>
+<body>
+    <form>
+        <input type="button" id="test" value="test"/>
+    </form>
+</body>
+<script>
+    var test = document.getElementById("test");
+    test.onclick = function () {
+	    console.log(this.id);
+//	    test.onclick = null;
+    }
+</script>
+</html>

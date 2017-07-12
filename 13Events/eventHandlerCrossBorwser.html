@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>eventHandleCrossBrowser</title>
+    <script src="../utils/EventUtil.js"></script>
+</head>
+<body>
+    <form>
+        <input type="button" id="test" value="test"/>
+    </form>
+</body>
+<script>
+    // ie8
+    var test = document.getElementById("test");
+    EventUtil.addHandler(test, 'click', f1);
+    EventUtil.addHandler(test, 'click', f2);
+    function f1() {
+//	    console.log(a);
+	    console.log(this == window);
+	    console.log('111');
+    }
+    function f2() {
+	    console.log('222');
+	    EventUtil.removeHandler(test, 'click', f2);
+    }
+</script>
+</html>

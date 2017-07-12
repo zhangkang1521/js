@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>事件捕获</title>
+</head>
+<body>
+    <div id="parent" style="background-color: yellow;height: 100px; width: 100px">
+        <input type="button" value="click me" id="child"/>
+    </div>
+</body>
+<script>
+    var child = document.getElementById("child");
+    var parent = document.getElementById("parent");
+    child.addEventListener("click", function () {
+	    console.log("child");
+    }, true);
+    parent.addEventListener("click", function () {
+	    console.log("parent");
+    }, true);
+</script>
+</html>

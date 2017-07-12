@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>eventHandle3</title>
+</head>
+<body>
+    <form>
+        <input type="button" id="test" value="test"/>
+    </form>
+</body>
+<script>
+    // 可以添加多个事件监听，不会相互影响
+    var test = document.getElementById("test");
+    test.addEventListener("click", f1);
+    test.addEventListener("click", f2);
+    function f1() {
+//	    console.log(a);
+	    console.log(this);
+	    console.log('111');
+    }
+    function f2() {
+	    console.log('222');
+	    test.removeEventListener("click", f1);
+    }
+</script>
+</html>
