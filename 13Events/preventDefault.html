@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>preventDefault</title>
+</head>
+<body>
+    <a href="http://www.baidu.com" id="open" target="_blank">open</a>
+</body>
+<script>
+    var open = document.getElementById("open");
+    open.addEventListener("click", function (event) {
+        event.preventDefault(); // 阻止默认的打开页面行为
+	    console.log('xxx');
+    });
+</script>
+</html>

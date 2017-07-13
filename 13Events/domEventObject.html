@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>domEventObject</title>
+</head>
+<body>
+<button id="myBtn" type="button">myBtn</button>
+</body>
+<script>
+    var btn = document.getElementById("myBtn");
+    btn.onclick = function (event) {
+	    console.log(event.currentTarget === this);
+	    console.log(event.target === this);
+    };
+    document.body.onclick = function (event) {
+	    console.log(event.currentTarget);
+	    console.log(event.target); // 源头btn
+	    console.log(this);
+    }
+</script>
+</html>
