@@ -3,10 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <title>事件冒泡</title>
+    <script src="../utils/EventUtil.js"></script>
 </head>
 <body onclick="alert(3)" style="background-color: green">
     <div onclick="alert(2)" style="background-color: yellow;height: 100px; width: 100px">
-        <input type="button" value="click me" onclick="alert(1);event.stopPropagation();" style="background-color: red; height: 50px; width: 50px; margin: 10px 10px">xx</input>
+        <input type="button" value="click me" id="myBtn" style="background-color: red; height: 50px; width: 50px; margin: 10px 10px">xx</input>
     </div>
 </body>
+<script>
+    var btn = document.getElementById("myBtn");
+    btn.onclick = function (event) {
+	    console.log(1);
+//	    event.stopPropagation();
+//        window.event.cancelBubble = true; // ie阻止冒泡
+        var event = EventUtil.getEvent(event);
+        EventUtil.stopPropagation(event);
+    }
+</script>
 </html>

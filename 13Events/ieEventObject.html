@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ieEventObject</title>
+    <script src="../utils/EventUtil.js"></script>
+</head>
+<body>
+<button id="myBtn" type="button">myBtn</button>
+</body>
+<script>
+    // ie里用event.srcElement比this靠谱
+	var btn = document.getElementById("myBtn");
+	btn.onclick = function (event) {
+//		console.log(event); // ie<=8，获取不到
+//		console.log(window.event);
+//		console.log(window.event === event);
+		console.log(this === btn); // true
+		console.log(window.event.srcElement === btn); // true
+	};
+    btn.attachEvent("onclick", function (event) {
+//	    console.log(event); // attachEvent可以拿到参数event
+//		console.log(window.event);
+//		console.log(window.event === event);
+	    console.log(this === window); // true
+	    console.log(event.srcElement === btn); // true
+
+    })
+
+
+</script>
+</html>
