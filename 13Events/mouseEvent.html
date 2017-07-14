@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>mouseEvent</title>
+    <script src="../utils/EventUtil.js"></script>
+</head>
+<body>
+    <div style="width: 100px; height: 100px; border: 1px solid red" id="myDiv">test</div>
+    <!--<input type="text" id="myInpu"/>-->
+</body>
+<script>
+    var myDiv = document.getElementById("myDiv");
+    EventUtil.addHandler(myDiv, 'click', function (event) {
+	    console.log('click');
+    });
+    EventUtil.addHandler(myDiv, 'dblclick', function (event) {
+	    console.log('dblclick');
+    });
+    /** 左键，右键，中间滚轮键 按下*/
+    EventUtil.addHandler(myDiv, 'mousedown', function (event) {
+	    console.log('mousedown');
+    });
+
+    /** 左键，右键，中间滚轮键 松开*/
+    EventUtil.addHandler(myDiv, 'mouseup', function (event) {
+        console.log('mouseup');
+    });
+
+    /** 外面进入 */
+//    EventUtil.addHandler(myDiv, 'mouseenter', function (event) {
+//        console.log('mouseenter');
+//    });
+    /** 从元素里面离开，与mouseenter相反 */
+//    EventUtil.addHandler(myDiv, 'mouseleave', function (event) {
+//	    console.log('mouseleave');
+//    });
+
+    /** 在元素内移动，重复触发 */
+//    EventUtil.addHandler(myDiv, 'mousemove', function (event) {
+//	    console.log('mousemove');
+//    });
+
+    /** 与mouseleave区别？*/
+//    EventUtil.addHandler(myDiv, 'mouseout', function (event) {
+//	    console.log('mouseout');
+//    });
+
+    /**与mouseenter区别？ */
+//    EventUtil.addHandler(myDiv, 'mouseover', function (event) {
+//	    console.log('mouseover');
+//    });
+
+</script>
+</html>

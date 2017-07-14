@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>focusEvent</title>
+    <script src="../utils/EventUtil.js"></script>
+</head>
+<body>
+    <div id="myDiv" style="width:200px; height: 50px; background-color: gray" tabindex="1">
+        <input type="text" id="myInput">
+    </div>
+</body>
+<script>
+	var myDiv = document.getElementById("myDiv");
+	var myInput = document.getElementById("myInput");
+	/** focus不支持冒泡 */
+//	EventUtil.addHandler(myDiv, 'focus', function (event) {
+//		console.log('div');
+//	});
+//	EventUtil.addHandler(myInput, 'focus', function (event) {
+//		console.log('myInput');
+//	});
+    /** focusin 支持冒泡 */
+//    EventUtil.addHandler(myDiv, 'focusin', function (event) {
+//	    console.log('div');
+//    });
+//	EventUtil.addHandler(myInput, 'focusin', function (event) {
+//		console.log('myInput');
+//	});
+	/** blur不支持冒泡 */
+//    EventUtil.addHandler(myDiv, 'blur', function (event) {
+//        console.log('div');
+//    });
+//    EventUtil.addHandler(myInput, 'blur', function (event) {
+//        console.log('myInput');
+//    });
+	/** focusout支持冒泡 */
+//	EventUtil.addHandler(myDiv, 'focusout', function (event) {
+//		console.log('div');
+//	});
+//	EventUtil.addHandler(myInput, 'focusout', function (event) {
+//		console.log('myInput');
+//	});
+
+</script>
+</html>

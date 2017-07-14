@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>unloadEvent</title>
+    <script src="../utils/EventUtil.js"></script>
+    <script type="text/javascript">
+        EventUtil.addHandler(window, 'unload', function (event) {
+	        console.log('unload');//页面跳走，或重新刷新，一般会写clean,防止内存泄露
+        });
+    </script>
+</head>
+<body>
+<a href="http://www.baidu.com">bai</a>
+</body>
+</html>

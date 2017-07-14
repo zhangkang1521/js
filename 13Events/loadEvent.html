@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>loadEvent</title>
+    <script src="../utils/EventUtil.js"></script>
+    <script>
+        // load,文档全部加载完毕，包括图片等
+//        EventUtil.addHandler(window, "load", function (event) {
+//	        console.log(event.type);
+//	        console.log(EventUtil.getTarget(event));
+//           var btn = document.getElementById("myBtn");
+//	        console.log(btn);
+//        });
+
+    </script>
+</head>
+<body>
+<button id="myBtn">myBtn</button>
+<img src="0.jpg" id="myImg">
+</body>
+<script type="text/javascript">
+//	var img = document.getElementById("myImg");
+//	EventUtil.addHandler(img, "load", function (event) {
+//		console.log(event.type);
+//		console.log(EventUtil.getTarget(event).src);
+//	});
+    EventUtil.addHandler(window, "load", function (event) {
+       var image = document.createElement("img");
+//       var image = new Image();
+	    image.src = "Koala.jpg";
+	    document.body.appendChild(image);
+       EventUtil.addHandler(image, "load", function (event) {
+           event = EventUtil.getEvent(event);
+	       console.log(EventUtil.getTarget(event).src);
+       });
+    });
+</script>
+</html>

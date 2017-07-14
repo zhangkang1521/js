@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>resizeEvent</title>
+    <script src="../utils/EventUtil.js"></script>
+    <script>
+        EventUtil.addHandler(window, "resize", function (event) {
+	        console.log(event); // 触发很多次
+        });
+    </script>
+</head>
+<body>
+
+</body>
+</html>

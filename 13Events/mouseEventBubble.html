@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>mouseEvent</title>
+    <script src="../utils/EventUtil.js"></script>
+</head>
+<body>
+    <div style="width: 200px; height: 200px; border: 1px solid green" id="outerDiv">
+        <div style="width: 100px; height: 100px; border: 1px solid red; margin: 50px 50px" id="innerDiv">test</div>
+    </div>
+</body>
+<script>
+    var innerDiv = document.getElementById("innerDiv");
+    var outerDiv = document.getElementById("outerDiv");
+
+
+    /** mouseleave does not bubble( 一般用这个) */
+//    EventUtil.addHandler(innerDiv, 'mouseleave', function (event) {
+//	    console.log('inner mouseleave');
+//    });
+//    EventUtil.addHandler(outerDiv, 'mouseleave', function (event) {
+//	    console.log('outer mouseleave');
+//    });
+
+    /** mouseout bubble */
+    EventUtil.addHandler(innerDiv, 'mouseout', function (event) {
+	    console.log('inner mouseout');
+    });
+    EventUtil.addHandler(outerDiv, 'mouseout', function (event) {
+	    console.log('outer mouseout'); // 移出outerDiv或进入移出innerDiv都会触发，这不是我们想要的
+    });
+
+
+</script>
+</html>
