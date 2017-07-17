@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>screenCoordinate</title>
+    <script src="../utils/EventUtil.js"></script>
+</head>
+<body>
+<div id="myDiv" style="width:500px;height: 500px; border: 1px solid red;position: absolute; left: 100px;">test</div>
+</body>
+<script>
+	var div = document.getElementById("myDiv");
+	EventUtil.addHandler(div, 'click', function (event) {
+		event = EventUtil.getEvent(event);
+		console.log(event.screenX, event.screenY); // 距离屏幕左上角
+
+	});
+</script>
+</html>

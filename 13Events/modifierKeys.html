@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>modifierKeys</title>
+    <script src="../utils/EventUtil.js"></script>
+</head>
+<body>
+<div id="myDiv" style="width:500px;height: 500px; border: 1px solid red;position: absolute; left: 100px;">test</div>
+</body>
+<script>
+	var div = document.getElementById("myDiv");
+	EventUtil.addHandler(div, 'click', function (event) {
+        event = EventUtil.getEvent(event);
+        var keys = new Array();
+		console.log(event.shiftKey);
+		console.log(event.ctrlKey);
+		console.log(event.altKey);
+		console.log(event.metaKey);
+	});
+</script>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>clentCoordinate</title>
+    <script src="../utils/EventUtil.js"></script>
+</head>
+<body>
+    <div id="myDiv" style="width:500px;height: 500px; border: 1px solid red;position: absolute; left: 100px;">test</div>
+</body>
+<script>
+    var div = document.getElementById("myDiv");
+    EventUtil.addHandler(div, 'click', function (event) {
+       event = EventUtil.getEvent(event);
+	    console.log(event.clientX, event.clientY);  // 不包括scroll
+//	    console.log(event.pageX, event.pageY); // ie<=8不支持
+        var pageX = event.pageX, pageY = event.pageY;
+        if(pageX == undefined) {
+        	pageX = event.clientX + (document.body.scrollLeft || document.documentElement.scrollLeft);
+        }
+	    if(pageY == undefined) {
+		    pageY = event.clientY + (document.body.scrollTop || document.documentElement.scrollTop);
+	    }
+	    console.log(pageX, pageY);
+    });
+</script>
+</html>
