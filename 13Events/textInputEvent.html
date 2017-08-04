@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>textInput</title>
+    <script src="../utils/EventUtil.js"></script>
+</head>
+<body>
+<input type="text" id="myInput"/>
+</body>
+<script>
+
+
+
+	var myInput = document.getElementById("myInput");
+	// 只有chrome支持
+	EventUtil.addHandler(myInput, 'textInput', function (event) {
+        event = EventUtil.getEvent(event);
+		console.log(event.data);
+	});
+
+//	EventUtil.addHandler(myInput, 'keypress', function (event) {
+//		event = EventUtil.getEvent(event);
+//		console.log(event);
+//	});
+
+
+
+</script>
+</html>

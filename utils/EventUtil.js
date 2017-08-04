@@ -73,7 +73,30 @@ var EventUtil = {
 		} else {
 			event.cancelBubble = true;
 		}
-	}
+	},
 
+	/**
+	 * 获取滚动数据
+	 * @param event
+	 */
+	getWheelDelta: function (event) {
+		if(event.wheelDelta) {
+			return event.wheelDelta; // 前滚返回120，后滚返回-120
+		} else {
+			return -event.detail * 40; // firefox 前滚返回-3，后滚返回3
+		}
+	},
+
+	/**
+	 * 获取press事件按键ascii码值
+	 * @param event
+	 */
+	getCharCode: function (event) {
+		if(typeof event.charCode == 'number') { // ie<=8 undefined
+			return event.charCode;
+		} else {
+			return event.keyCode;
+		}
+	}
 
 }

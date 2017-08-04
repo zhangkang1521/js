@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>mousewheel</title>
+    <script src="../utils/EventUtil.js"></script>
+</head>
+<body>
+<div style="width: 100px; height: 100px; border: 1px solid red" id="myDiv">test</div>
+<!--<input type="text" id="myInpu"/>-->
+</body>
+<script>
+
+    function handleMouseWheel(event) {
+        event = EventUtil.getEvent(event);
+        var delta = EventUtil.getWheelDelta(event);
+	    console.log(delta);
+    }
+
+	var myDiv = document.getElementById("myDiv");
+	EventUtil.addHandler(myDiv, 'mousewheel', handleMouseWheel);
+
+	// firefox
+	EventUtil.addHandler(myDiv, 'DOMMouseScroll', handleMouseWheel);
+
+
+</script>
+</html>

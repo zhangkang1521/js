@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>keyboard</title>
+    <script src="../utils/EventUtil.js"></script>
+</head>
+<body>
+<div style="width: 100px; height: 100px; border: 1px solid red" id="myDiv">test</div>
+<input type="text" id="myInput"/>
+</body>
+<script>
+
+
+
+	var myDiv = document.getElementById("myInput");
+	// 一直按住会一直触发,非字符键会触发
+	EventUtil.addHandler(myDiv, 'keydown', function (event) {
+//		console.log(event.keyCode);
+		console.log(event.key); // a Shift
+		console.log(event.code); // KeyA leftShift
+	});
+
+    //按住会一直触发，非字符键不触发
+//	EventUtil.addHandler(myDiv, 'keypress', function (event) {
+//		console.log(event);
+//	});
+
+//	EventUtil.addHandler(myDiv, 'keyup', function (event) {
+//		console.log(event);
+//	});
+
+//	EventUtil.addHandler(myDiv, 'textInput', function (event) {
+//		console.log(event);
+//	});
+
+//	EventUtil.addHandler(myDiv, 'keypress', function (event) {
+////		console.log(event.charCode); // ie<=8 undefine
+////		console.log(event.keyCode); // firefox始终返回0
+//		console.log(EventUtil.getCharCode(event));
+//	});
+
+//	console.log(String.fromCharCode(97)); // 返回字符
+
+</script>
+</html>

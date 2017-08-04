@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>com</title>
+    <script src="../utils/EventUtil.js"></script>
+</head>
+<body>
+<input type="text" id="myInput"/>
+</body>
+<script>
+
+    // ie9+ 支持 输入法事件
+
+	var myDiv = document.getElementById("myInput");
+
+	EventUtil.addHandler(myDiv, 'compositionstart', function (event) {
+		console.log('composition start');
+		event = EventUtil.getEvent(event);
+		console.log(event.data);
+	});
+
+	EventUtil.addHandler(myDiv, 'compositionupdate', function (event) {
+		console.log('composition update');
+		event = EventUtil.getEvent(event);
+		console.log(event.data);
+	});
+
+	EventUtil.addHandler(myDiv, 'compositionend', function (event) {
+		console.log('composition compositionend');
+		event = EventUtil.getEvent(event);
+		console.log(event.data);
+	});
+
+
+</script>
+</html>
