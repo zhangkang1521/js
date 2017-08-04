@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>readyStateChange</title>
+    <script src="../utils/EventUtil.js"></script>
+    <script>
+        EventUtil.addHandler(document, 'readystatechange', function (event) {
+	       if(document.readyState == 'interactive' || document.readyState == 'complete') {
+		       console.log('content load!');
+	       	  EventUtil.removeHandler(document, 'readystatechange', arguments.callee); // 防止多次触发
+           }
+        });
+    </script>
+</head>
+<body>
+
+</body>
+</html>

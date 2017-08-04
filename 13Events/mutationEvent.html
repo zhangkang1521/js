@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>mutationEvent</title>
+    <script src="../utils/EventUtil.js"></script>
+</head>
+<body>
+    <ul id="myList">
+        <li>item 1</li>
+        <li>item 2</li>
+        <li>item 3</li>
+    </ul>
+</body>
+<script>
+    var list = document.getElementById('myList');
+    // 本身被修改或子元素删除或修改
+//    EventUtil.addHandler(list, "DOMSubtreeModified", function (event) {
+//	    console.log(event.target);
+//    });
+
+    //本身或子元素被删除， 该事件会冒泡，handler加到任一祖先元素即可
+//    EventUtil.addHandler(list, "DOMNodeRemoved", function (event) {
+//	    console.log(event.relatedNode); // parent
+//	    console.log(event.target); // 自己
+//    });
+
+    //本身被删除 deprecated
+    EventUtil.addHandler(list, "DOMNodeRemovedFromDocument", function (event) {
+	    console.log(event.target);
+    });
+
+</script>
+</html>

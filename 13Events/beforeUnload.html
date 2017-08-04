@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>beforeUnload</title>
+    <script src="../utils/EventUtil.js"></script>
+</head>
+<body>
+
+</body>
+<script>
+    EventUtil.addHandler(window, "beforeunload", function (event) {
+    	event.returnValue = "test";
+    });
+</script>
+</html>

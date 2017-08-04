@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>domContentLoaded</title>
+    <script src="../utils/EventUtil.js"></script>
+</head>
+<body>
+
+</body>
+<script>
+    // 这里绑定事件到window也行，因为document事件会冒泡到window
+    EventUtil.addHandler(document, "DOMContentLoaded", function (event) {
+	    console.log('content loaded!');
+    });
+    EventUtil.addHandler(window, "load", function (event) {
+	    console.log('window load');
+    });
+</script>
+</html>

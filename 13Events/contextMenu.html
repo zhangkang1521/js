@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>contextMenu</title>
+    <script src="../utils/EventUtil.js"></script>
+    <style>
+        ul li {
+            list-style-type:none;
+        }
+        ul {
+            padding: 5px 5px;
+        }
+    </style>
+</head>
+<body>
+    <div id="myDiv" style="border: 1px solid red; width: 200px; height: 200px">right click me</div>
+    <ul id="myMenu" style="position: absolute; visibility: hidden;background-color: silver">
+        <li><a href="http://www.baidu.com" target="_blank">baidu</a></li>
+        <li><a href="http://www.google.com" target="_blank">google</a></li>
+        <li><a href="http://www.lvmama.com" target="_blank">lvmama</a></li>
+    </ul>
+</body>
+<script>
+    // visibility 不可见还会占用页面空间，display none不会占用
+    var div = document.getElementById("myDiv");
+    var menu = document.getElementById("myMenu");
+
+    EventUtil.addHandler(div, "contextmenu", function (event) {
+       event = EventUtil.getEvent(event);
+       EventUtil.preventDefault(event);
+
+       menu.style.left = event.clientX + "px";
+       menu.style.top = event.clientY + "px";
+       menu.style.visibility = "visible"
+    });
+
+    // 事件会冒泡，所以加到document上就行
+    EventUtil.addHandler(document, "click", function (event) {
+	    menu.style.visibility = "hidden";
+    });
+</script>
+</html>
