@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>simulateClick</title>
+</head>
+<body>
+    <input type="button" value="click" id="myBtn">
+</body>
+<script>
+	var btn = document.getElementById("myBtn");
+
+	btn.onclick = function (event) {
+		console.log(event);
+		console.log('clicked');
+	};
+
+	// 模拟事件
+    var event = document.createEvent("MouseEvent"); // DOM Level2 使用复数(MouseEvents)，DOM Level3使用单数(MouseEvent)
+    // typeArg,canBubbleArg,cancelableArg,viewArg,detailArg,  screenXArg,screenYArg,clientXArg,clientYArg,  ctrlKeyArg,altKeyArg,shiftKeyArg,metaKeyArg,   buttonArg,relatedTargetArg
+    event.initMouseEvent("click", true, true, document.defaultView, 0, 10, 0, 0, 0, false, false, false,false, 0, null);
+    btn.dispatchEvent(event); // 触发事件
+
+</script>
+</html>

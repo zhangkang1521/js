@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>simulateMyEvent</title>
+    <script src="../../utils/EventUtil.js"></script>
+</head>
+<body>
+    <input type="button" value="click" id="myBtn">
+</body>
+<script>
+	var btn = document.getElementById("myBtn");
+
+	EventUtil.addHandler(btn, 'myEvent', function (event) {
+		console.log(event);
+	});
+
+	// 模拟事件
+    var event = document.createEvent("CustomEvent"); //
+    event.initCustomEvent('myEvent', true, false, 'hello');
+    btn.dispatchEvent(event); // 触发事件
+
+</script>
+</html>

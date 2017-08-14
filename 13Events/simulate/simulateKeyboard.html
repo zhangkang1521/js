@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>simulateKeyboard</title>
+</head>
+<body>
+    <input type="text"  id="myText">
+</body>
+<script>
+	var text = document.getElementById("myText");
+
+	text.onkeydown = function (event) {
+		console.log(event);
+	};
+
+	// 模拟事件
+    var event = document.createEvent("KeyboardEvent"); //
+    // typeArg,canBubbleArg,cancelableArg,viewArg,keyIdentifierArg,keyLocationArg,modifiersList
+    event.initKeyboardEvent('keydown', true, true, document.defaultView, "a", 0, "Shift", 0);
+	text.dispatchEvent(event); // 触发事件
+
+</script>
+</html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>removeEventHandler</title>
+</head>
+<body>
+    <div id="myDiv">
+        <input type="button" value="click me" id="myBtn">
+    </div>
+</body>
+<script>
+    var btn = document.getElementById("myBtn");
+    btn.onclick = function () {
+    	btn.onclick = null;// 内存回收
+      document.getElementById("myDiv").innerHTML = "processing...";
+    };
+</script>
+</html>
