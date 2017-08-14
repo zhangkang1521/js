@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>eventDelegation</title>
+    <script src="../utils/EventUtil.js"></script>
+</head>
+<body>
+    <ul id="myLinks">
+        <li id="goSomeWhere">go some where</li>
+        <li id="doSomething">go something</li>
+        <li id="sayHi">say hi</li>
+    </ul>
+</body>
+<script>
+    var list = document.getElementById("myLinks");
+    // 这样比分别为每个li都绑定事件性能要好
+    EventUtil.addHandler(list, 'click', function (event) {
+       event = EventUtil.getEvent(event);
+       var target = EventUtil.getTarget(event);
+       console.log(target.id);
+
+       switch (target.id) {
+           case 'goSomeWhere':
+	           console.log('goSomeWhere');
+	           break;
+           case 'doSomething':
+	           console.log('doSomething');
+	           break;
+           case 'sayHi':
+	           console.log('sayHi');
+	           break;
+       }
+    });
+</script>
+</html>

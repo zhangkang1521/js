@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>pageShowHide</title>
+    <script src="../utils/EventUtil.js"></script>
+</head>
+<body>
+<input type="text" name="id">
+<select id="category" name="category">
+    <option value="1">a</option>
+    <option value="2">b</option>
+</select>
+ <a href="./next.html">baidu</a>
+</body>
+<script>
+    (function () {
+    	var showCount = 0;
+	    EventUtil.addHandler(window, 'load', function (event) {
+		    console.log('load fired');
+	    });
+    	EventUtil.addHandler(window, 'pageshow', function (event) {
+    		showCount++;
+		    console.log(showCount);
+		    console.log(event.persisted);
+	    });
+	    EventUtil.addHandler(window, 'pagehide', function (event) {
+		    console.log('pagehide:'+event.persisted);
+	    });
+    })();
+</script>
+</html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>hashChange</title>
+    <script src="../utils/EventUtil.js"></script>
+</head>
+<body>
+    <button type="button" onclick="location.hash=4">hash change to 4</button>
+</body>
+<script>
+    // #后面的字符不会发送到服务端，angular2使用hash url
+    EventUtil.addHandler(window, 'hashchange', function (event) {
+	    console.log(event.oldURL);
+	    console.log(event.newURL);
+	    console.log(location.hash);
+    });
+</script>
+</html>
