@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>autoFocus</title>
+    <script src="../utils/EventUtil.js"></script>
+</head>
+<body>
+<form id="form1">
+    <input type="text" autofocus>
+    <input type="text">
+</form>
+</body>
+<script>
+    EventUtil.addHandler(window, 'load', function (event) {
+//       document.forms[0].elements[0].focus();
+        var element = document.forms[0].elements[0];
+	    console.log(element.autofocus);
+	    if(!element.autofocus){ // ie<=9
+	    	element.focus();
+		    console.log('js focus');
+        }
+
+    });
+</script>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>formField</title>
+</head>
+<body>
+    <form id="form1">
+        <input type="text" name="age">
+        <input type="radio" name="color" value="red">
+        <input type="radio" name="color" value="green">
+        <input type="radio" name="color" value="yellow">
+    </form>
+</body>
+<script>
+    var form = document.getElementById("form1");
+    console.log(form.elements['age']);
+    console.log(form.elements['color']); // 包含3个
+
+    var field = form.elements['age'];
+    field.value = 25;
+    console.log(field.form === form);
+    field.focus();
+//    field.disabled = true;
+    field.type = 'checkbox';
+</script>
+</html>

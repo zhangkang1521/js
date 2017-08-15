@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>submit</title>
+    <script src="../utils/EventUtil.js"></script>
+</head>
+<body>
+    <form id="form1" action="xxx" target="_blank">
+        <input type="submit" value="submit" id="submitBtn">
+        <button type="submit">submit button</button> <!-- 默认为submit,改为button不提交-->
+        <input type="image" src="graphic.gif">
+    </form>
+</body>
+<script>
+    var form = document.getElementById("form1");
+//    EventUtil.addHandler(form, "submit", function (event) {
+//	    console.log('submit');
+//	    EventUtil.preventDefault(event);
+//    });
+
+//    EventUtil.addHandler(form, "submit", function (event) {
+//	    var submitBtn = document.getElementById("submitBtn");
+//	    submitBtn.disabled = true; // 防止表单重复提交，按钮置灰
+//    });
+
+    var submitCount = 0;
+    EventUtil.addHandler(form, "submit", function (event) {
+	   if(submitCount++ > 0) {
+		   console.log('表单重复提交，忽略');
+		   EventUtil.preventDefault(event);
+       }
+    });
+
+</script>
+</html>

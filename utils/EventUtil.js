@@ -97,6 +97,15 @@ var EventUtil = {
 		} else {
 			return event.keyCode;
 		}
+	},
+	/**
+	 * 获取粘贴板内容
+	 * @param event
+	 * @returns {string}
+	 */
+	getClipboardText: function (event) {
+		var clipboardData = (event.clipboardData || window.clipboardData);
+		return clipboardData.getData("text");
 	}
 
 }

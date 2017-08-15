@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>inputFilter</title>
+    <script src="../utils/EventUtil.js"></script>
+</head>
+<body>
+    <input type="text" id="textBox"/>
+</body>
+<script>
+    var textBox = document.getElementById("textBox");
+    // keypress 不支持中文输入触发，在chrome中ctrl+v不触发
+    EventUtil.addHandler(textBox, 'keypress', function (event) {
+       event = EventUtil.getEvent(event);
+       var charCode = EventUtil.getCharCode(event);
+	   var ch = String.fromCharCode(charCode);
+	    console.log(ch);
+       if(!/\d/.test(ch) && charCode > 9) {
+	       EventUtil.preventDefault(event);
+       }
+    });
+</script>
+</html>

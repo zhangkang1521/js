@@ -17,8 +17,8 @@
 	// 一直按住会一直触发,非字符键会触发
 	EventUtil.addHandler(myDiv, 'keydown', function (event) {
 //		console.log(event.keyCode);
-		console.log(event.key); // a Shift
-		console.log(event.code); // KeyA leftShift
+//		console.log(event.key); // a Shift
+//		console.log(event.code); // KeyA leftShift
 	});
 
     //按住会一直触发，非字符键不触发
@@ -34,11 +34,11 @@
 //		console.log(event);
 //	});
 
-//	EventUtil.addHandler(myDiv, 'keypress', function (event) {
-////		console.log(event.charCode); // ie<=8 undefine
-////		console.log(event.keyCode); // firefox始终返回0
-//		console.log(EventUtil.getCharCode(event));
-//	});
+	EventUtil.addHandler(myDiv, 'keypress', function (event) {
+//		console.log(event.charCode); // ie<=8 undefine
+//		console.log(event.keyCode); // firefox始终返回0
+		console.log(EventUtil.getCharCode(event));
+	});
 
 //	console.log(String.fromCharCode(97)); // 返回字符
 

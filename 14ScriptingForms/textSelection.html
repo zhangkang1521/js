@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>textSelection</title>
+    <script src="../utils/EventUtil.js"></script>
+</head>
+<body>
+<form id="form1">
+    <input type="text" value="hello" name="username">
+    <input type="text">
+</form>
+</body>
+<script>
+    var username = document.forms['form1'].elements['username'];
+//    username.select();
+    EventUtil.addHandler(username, "select", function (event) {
+	    if(typeof username.selectionStart == 'number') {
+		    console.log(username.value.substring(username.selectionStart, username.selectionEnd));
+        } else {
+		    console.log(document.selection.createRange().text); // ie<=8
+        }
+    });
+
+</script>
+</html>

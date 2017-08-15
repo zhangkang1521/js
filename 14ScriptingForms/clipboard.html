@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>clipboard</title>
+    <script src="../utils/EventUtil.js"></script>
+</head>
+<body>
+<input type="text" id="textBox">
+<p id="para">hello,please copy me!</p>
+</body>
+<script>
+    var textBox = document.getElementById("textBox");
+    EventUtil.addHandler(textBox, 'paste', function (event) {
+	    console.log(EventUtil.getClipboardText(event));
+    });
+
+    var para = document.getElementById('para');
+    EventUtil.addHandler(para, 'copy', function () {
+    	event.clipboardData.setData('text/plain', 'xx');
+	    console.log(EventUtil.getClipboardText(event));
+    });
+
+
+</script>
+</html>

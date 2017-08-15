@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>basic</title>
+</head>
+<body>
+    <form id="form1" name="form2">
+        11
+    </form>
+    <form id="form2" name="form3">
+        22
+    </form>
+</body>
+<script>
+//    var form = document.getElementById("form1");
+//    var form = document.forms[0];
+    console.log(document.forms);
+    var form = document.forms['form2']; // id or name
+    console.log(form);
+</script>
+</html>

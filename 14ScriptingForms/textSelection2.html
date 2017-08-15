@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>textSelection2</title>
+</head>
+<body>
+    <form id="form1">
+        <input type="text" value="hello" name="username">
+    </form>
+</body>
+<script>
+	var username = document.forms['form1'].elements['username'];
+	username.value = 'Hello World';
+	//
+//	username.focus();
+//	username.setSelectionRange(2, 4);
+
+    // ie
+    var range = username.createTextRange();
+    range.collapse();
+    range.moveStart("character", 2);
+    range.moveEnd('character', 4);
+    range.select();
+
+
+</script>
+</html>
