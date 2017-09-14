@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+//	function Person(name,age){
+//		this.name=name;
+//		this.age=age;
+//	}
+//	Person.prototype={
+//		setName : function(n){this.name=n;},
+//		getName : function(){return this.name;}
+//	}
+//	var p = new Person('jack',25);
+//	console.log(p);
+
+	function Person(name,age){
+		if(!this.setName){
+			return new Person(name,age);
+		}
+		this.name=name;
+		this.age=age;
+	}
+	Person.prototype={
+		setName : function(n){this.name=n;},
+		getName : function(){return this.name;}
+	}
+	var p = Person('jack',25);
+	console.log(p);
+
+
+</script>
+</html>

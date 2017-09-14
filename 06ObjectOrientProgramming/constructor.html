@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>构造函数</title>
+</head>
+<body>
+
+</body>
+<script>
+	function Person(name, age, job) {
+		this.name = name;
+		this.age = age;
+		this.job = job;
+		this.sayName = function () {
+			return this.name;
+		}
+		// this.name = sayName
+	}
+
+	// 虽然能解决函数实例重复的问题，这样会造成混乱，这个函数式全局的，但应该属于对象Person
+	// function sayName() {
+	//     return this.name;
+	// }
+
+	var p1 = new Person("zk", 25, "software engineer"); // 用new，构造函数
+	var p2 = new Person("zy", 15, "teacher");
+
+	console.log(p1);
+	console.log(p2);
+	console.log(p1 instanceof Person);
+	console.log(p1.constructor);
+
+	console.log(p1.sayName == p2.sayName); // 函数实例有两份
+</script>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>prototype</title>
+</head>
+<body>
+
+</body>
+<script>
+	/** 使用prototype 解决两份函数的问题 */
+	/** prototype中的数据是共享的，不可改变 **/
+
+	 function Person() {}
+
+	 Person.prototype = {
+         constructor: Person, // 保证person1.constructor == Person，但会被for-in遍历出来
+	     name: "zk",
+	     age: 20,
+	     friends: ["fangjun", "junjian"],
+	     sayName: function () {
+	         return this.name;
+	     }
+	 }
+	// // 手动将constructor设回Person，并保证不会被for-in遍历出
+	// Object.defineProperty(Person.prototype, "constructor", {
+	//    enumerable: false,
+	//     value: Person
+	// });
+	//
+	//
+	 var p1 = new Person();
+	 var p2 = new Person();
+	console.log(p1);
+	console.log(p2);
+	console.log(p1 instanceof Person);
+	console.log(p2 instanceof Person);
+	 p2.name = "zy"; // 并没有改变prototype中的name
+
+	// console.log(p1.constructor == Person);
+	//
+	// delete p2.name;
+	 console.log(p1.hasOwnProperty("name"));
+	 console.log(p2.hasOwnProperty("name"));
+	// console.log(p1);
+	// console.log(p2);
+	// console.log(p1.sayName == p2.sayName);
+	// console.log(p1.sayName());
+	// console.log(p2.sayName());// 先找instance中有没有，再找prototype中有没有
+	// console.log(Person.prototype.constructor);
+	// console.log(p1.__proto__);
+	// console.log(Person.prototype.isPrototypeOf(p1));
+	console.log(p2.name);
+	 console.log(Object.getPrototypeOf(p2).name);
+	// for(var prop in p2) {
+	//     console.log(prop);
+	// }
+
+	// console.log(Object.keys(Person.prototype));
+	// console.log(Object.keys(p2));
+	// console.log(Object.getOwnPropertyNames(Person.prototype));
+	// console.log(Object.getOwnPropertyNames(p2));
+
+	// console.log(Array.prototype);
+	// console.log(String.prototype);
+
+	// 给String类添加方法，不建议这么做，名字冲突可能会覆盖方法
+	// String.prototype.startWith = function (text) {
+	//     return this.indexOf(text) == 0;
+	// }
+	// var msg = "hello,world";
+	// console.log(msg.startWith("hello"));
+
+	// protoType是共享的
+	// p1.friends.push("wangwei");
+	// console.log(p1);
+	// console.log(p2);
+	// console.log(Person.prototype);
+</script>
+</html>

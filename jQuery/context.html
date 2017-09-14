@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>上下文测试</title>
+    <script src="jquery-1.7.1.js"></script>
+</head>
+<body>
+    <div id="outer">
+        <input value="1">
+        <div id="inner">
+            <input value="2">
+        </div>
+    </div>
+</body>
+<script>
+    var outer = $("#outer");
+    var inner = $("#inner");
+    var inner_ = document.getElementById("inner");
+    // 上下文，传入jQuery对象，js对象均可
+    console.log(inner);
+    console.log(inner_);
+    var input = $("input", inner_);
+    input.each(function (i) {
+	    console.log($(this).val());
+    });
+
+    // 等效
+    $("#inner").find("input").each(function () {
+	    console.log($(this).val());
+    });
+</script>
+</html>

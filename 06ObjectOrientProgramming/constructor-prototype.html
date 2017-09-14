@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>constructor-prototype组合使用</title>
+</head>
+<body>
+
+</body>
+<script>
+    // 属性不共享，函数共享，一般使用这种方式定义对象
+	function Person(name, age) {
+		this.name = name;
+		this.age = age;
+		this.friends = ["fangjun", "wangwei"];
+	}
+
+	Person.prototype = {
+		constructor: Person,
+		sayName: function () {
+			return this.name;
+		}
+	};
+
+	var p1 = new Person("zk", 25);
+	var p2 = new Person("zy", 15);
+	p1.friends.push("junjian");
+	console.log(p1);
+	console.log(p2);
+	console.log('p1 instanceof Person:', p1 instanceof Person);
+	console.log('p2 instanceof Person:', p2 instanceof Person);
+	console.log(p1.sayName());
+	console.log(p2.sayName());
+	console.log(p1.sayName == p2.sayName);
+</script>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>工厂创建对象</title>
+</head>
+<body>
+
+</body>
+<script>
+	 function createPerson(name, age, job) {
+	     var o = new Object();
+	     o.name = name;
+	     o.age = age;
+	     o.job = job;
+	     o.sayName = function () {
+	         return this.name;
+	     }
+	     return o;
+	 }
+
+	 var person1 = createPerson("zk", 25, "software engineer");
+	 var person2 = createPerson("zy", 15, "teacher");
+	 console.log(person1);
+	 console.log(person2);
+	 console.log(person1 instanceof createPerson); // 无法识别对象类型
+	 console.log(person1.sayName === person2.sayName); //函数不是共用内存
+</script>
+</html>

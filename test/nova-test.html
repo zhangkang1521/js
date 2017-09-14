@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>nova-test</title>
+    <link rel="stylesheet" href="http://pic.lvmama.com/min/index.php?f=styles/backstage/v1/vst/base.css,styles/lv/buttons.css,styles/lv/dialog.css,styles/backstage/ebk/common.css,styles/v5/modules/tip.css,styles/backstage/ebk/finance/index.css">
+
+    <script src="jquery-1.8.3.min.js"></script>
+    <script src="nova.js"></script>
+
+</head>
+<body>
+    <button id="test">xxx</button>
+</body>
+<script>
+    $(document).ready(function () {
+    	$("#test").bind('click', function () {
+    		console.log('nova');
+		    nova.alert('xxx', function () {
+			    console.log('close');
+		    });
+	    });
+
+    });
+
+</script>
+</html>
