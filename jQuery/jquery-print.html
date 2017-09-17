@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>打印jquery类，对象的所有属性</title>
+    <!-- <script src="jquery-1.7.1.js"></script>-->
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.1.js"></script>
+</head>
+<body>
+<div id="outer"></div>
+<table border="1px solid black" cellpadding="0" cellspacing="0">
+    <thead>
+    <tr>
+        <th>jquery</th>
+        <th>jquery.prototype</th>
+        <th>jquery对象</th>
+    </tr>
+    </thead>
+    <tbody id="tbody">
+
+    </tbody>
+</table>
+</body>
+<script>
+    var tbody = $("#tbody");
+    var arr1 = [], arr2 = [], arr3 = [];
+    for (var key in $) {
+        arr1.push(key);
+    }
+    for (var key in $.prototype) {
+        arr2.push(key);
+    }
+    var jqueryObj = $("outer");
+    console.log(jqueryObj);
+    for (var key in jqueryObj) {
+        arr3.push(key);
+    }
+//    console.log(arr1);
+//    console.log(arr2);
+//    console.log(arr3);
+
+    var len = Math.max(arr1.length, arr2.length, arr3.length);
+    for (var i = 0; i < len; i++) {
+        var jqueryEle = arr1[i] ? '<td>' + arr1[i] + '</td>' : '<td></td>';
+        var jqueryPropEle = arr2[i] ? '<td>' + arr2[i] + '</td>' : '<td></td>';
+        var isOwn = jqueryObj.hasOwnProperty(arr3[i]);
+        if(isOwn) {
+            var jqueryObjEle = '<td style="color: red">' + arr3[i] + '</td>';
+        } else {
+            var jqueryObjEle = '<td>' + arr3[i] + '</td>';
+        }
+
+        var temp = '<tr>' + jqueryEle + jqueryPropEle + jqueryObjEle + '</tr>';
+        tbody.append(temp);
+    }
+    tbody.append('<tr><td>' + arr1.length + '</td><td>'+arr2.length+'</td><td>'+arr3.length+'</td></tr>');
+
+    //    console.log(typeof $);
+    //    console.log(typeof jqueryObj);
+    //    console.log($().constructor === $);
+
+</script>
+</html>

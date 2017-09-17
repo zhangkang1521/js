@@ -9,19 +9,15 @@
 </body>
 <script>
 	function Person(name, age, job) {
+	    console.log('this:', this);
 		this.name = name;
 		this.age = age;
 		this.job = job;
 		this.sayName = function () {
 			return this.name;
 		}
-		// this.name = sayName
 	}
 
-	// 虽然能解决函数实例重复的问题，这样会造成混乱，这个函数式全局的，但应该属于对象Person
-	// function sayName() {
-	//     return this.name;
-	// }
 
 	var p1 = new Person("zk", 25, "software engineer"); // 用new，构造函数
 	var p2 = new Person("zy", 15, "teacher");
@@ -30,7 +26,16 @@
 	console.log(p2);
 	console.log(p1 instanceof Person);
 	console.log(p1.constructor);
+	console.log('constructor == Person:', p1.constructor == Person)
+	console.log('function instance:', p1.sayName == p2.sayName); // 函数实例有两份
 
-	console.log(p1.sayName == p2.sayName); // 函数实例有两份
+	// call as function
+//    Person('Jane', 22, 'teacher'); // 不写new, this就是window
+//    console.log(window.name);
+
+    // call in the scope of another object
+//    var obj = new Object();
+//    Person.call(obj, 'Rochester', 50,'master'); // 这里this指向obj
+//    console.log(obj.sayName());
 </script>
 </html>
