@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>构造jquery对象</title>
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.1.js"></script>
+</head>
+<body>
+    <div id="test">test</div>
+    <div id="a">
+        <a id="hello">hello</a>
+    </div>
+    <div id="b">
+        <a id="world">world</a>
+    </div>
+</body>
+<script>
+    // $(selector, context) 12个分支
+
+//     1. 可以转换为空 return this
+//    console.log($());
+//	console.log($(0));
+//	console.log($(1)); // 属于其他情况
+
+//     2. Element 即存在nodeType，
+//    var a = document.getElementById("a"); // nodeType == 1
+//    console.log($(a));
+//    console.log(document.body); // nodeType == 9
+
+     /** ------------------------- 3-9 String类型 ------------------------- */
+
+     /** 3. "body" */
+//    console.log($('body')); // body只有一份，直接查询
+
+    /** 4. 单个标签 */
+//    $("<div>").appendTo('body');
+//    $("<div>", {'class': 'test'}).appendTo('body');
+
+    /** 5. 复杂html代码 */
+//    $("<p>hello</p><div>world</div>").appendTo('body');
+
+    /** 6. #id */
+//    $("#a");
+
+    /** 7. 选择器表达式, undefined */
+//    console.log($("div a"));
+
+    /** 8. 选择器表达式, jquery对象 */
+//    var context = $("#a");
+//    console.log($("a", context));
+
+    /** 9. 选择器表达式, dom对象 */
+//    var context = document.getElementById("a");
+//    console.log($("a", context));
+
+    /** ------------------------- 3-9 String类型 ------------------------- end */
+
+    /** 10. 函数 */
+//    $(function () {
+//	    console.log('ready');
+//    });
+
+    /** 11. jquery对象 */
+//    var a = $("#a");
+//    console.log($(a));
+
+    /** 12. 其他 */
+//    console.log($([1, 2, 3]));
+    console.log($({"name": "zk"}));
+</script>
+</html>

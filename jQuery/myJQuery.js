@@ -3,7 +3,7 @@
  */
 (function (window, undefined) {
 
-	var jQuery = (function () { // 这个闭包也可以去掉
+	var jQuery = (function () {
 		var jQuery = function (selector, context) {
 			return new jQuery.fn.init( selector, context); // new $('xx')，可以写成 $('xx')
 		};
@@ -20,7 +20,7 @@
 			},
 
 			selector: '',
-			jquery: "1.7.1",
+			jquery: "1.0.0",
 			length: 0,
 
 			size: function() {
@@ -31,7 +31,7 @@
 
 		return jQuery;
 
-	})();
+	})(); // 这个闭包也可以去掉(这样写的好处是，将jQuery构造模块与其他模块分开，实现高内聚，低耦合)
 
 	window.jQuery = window.$ = jQuery; // 仅把$,jQuery暴露到全局
 

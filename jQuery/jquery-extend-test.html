@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jquery-extend-test</title>
+    <script src="./jquery-1.7.1-zk.js"></script>
+    <script>
+        // $.extend 扩展的方法内部使用$['xxx'] = function;，所以只能通过$.xxx()访问，不能通过$().xxx()访问
+        $.extend({
+        	xxx: function () {
+		        console.log('extend xxx');
+	        }
+        });
+//        $().xxx();
+        console.log($);
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

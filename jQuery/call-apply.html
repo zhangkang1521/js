@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+	function Person(name) {
+		this.name = name;
+	};
+	Person.prototype = {
+		sayHello: function (arg1, arg2) {
+			console.log(arguments);
+			console.log(this.name+arg1+arg2);
+		}
+	};
+
+
+	var p = new Person('zk');
+	//    p.sayHello();
+
+	var p2 = {
+		name: 'zy'
+	};
+	// p2并没有sayHello方法，但可以这样调用
+	Person.prototype.sayHello.call(p2, 1, 2); // 改变this
+	Person.prototype.sayHello.apply(p2, [3,[4]]); // 改变this，必须传数组
+
+
+    // 二维数组降为一维数组
+	var ret = [1, 2, [33, 44]];
+	console.log(ret.concat.apply([], ret)); // 一维数组，这里很巧妙
+	console.log([].concat(ret)); // 二维数组
+</script>
+</html>

@@ -17,6 +17,7 @@
 
 	Person.prototype = {
 		constructor: Person,
+        version: 1.0,
 		sayName: function () {
 			return this.name;
 		}
@@ -29,8 +30,11 @@
 	console.log(p2);
 	console.log('p1 instanceof Person:', p1 instanceof Person);
 	console.log('p2 instanceof Person:', p2 instanceof Person);
-	console.log(p1.sayName());
-	console.log(p2.sayName());
-	console.log(p1.sayName == p2.sayName);
-</script>
+
+	console.log('函数共用:', p1.sayName === p2.sayName);
+
+    console.log('是否有自己的属性name:', p1.hasOwnProperty('name'));
+    console.log('是否有自己的属性version:', p1.hasOwnProperty('version')); // false，从原型链中继承而来
+
+  </script>
 </html>
