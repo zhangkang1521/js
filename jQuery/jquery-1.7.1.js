@@ -298,7 +298,7 @@
 
 			slice: function() {
 				return this.pushStack( slice.apply( this, arguments ),
-					"slice", slice.call(arguments).join(",") );
+					"slice", slice.call(arguments).join(",") ); // slice.call 将arguments转换成数组，以便join
 			},
 
 			map: function( callback ) {
@@ -314,7 +314,7 @@
 			// For internal use only.
 			// Behaves like an Array's method, not like a jQuery method.
 			push: push,
-			sort: [].sort,
+			sort: [].sort, // 这里为什么不用Array.prototype.sort?
 			splice: [].splice
 		};
 
@@ -385,7 +385,7 @@
 			return target;
 		};
 
-		jQuery.extend({
+		jQuery.extend({ // 静态属性和方法
 			noConflict: function( deep ) {
 				if ( window.$ === jQuery ) {
 					window.$ = _$;
@@ -811,7 +811,7 @@
 				// Simulated bind
 				var args = slice.call( arguments, 2 ),
 					proxy = function() {
-						return fn.apply( context, args.concat( slice.call( arguments ) ) );
+						return fn.apply( context, args.concat( slice.call( arguments ) ) ); // 传上下文，传参
 					};
 
 				// Set the guid of unique handler to the same of original handler, so it can be removed
@@ -4984,7 +4984,7 @@
 			div = null;
 		})();
 
-		if ( document.querySelectorAll ) {
+		if ( document.querySelectorAll ) { // 优先使用浏览器内置的querySelectAll
 			(function(){
 				var oldSizzle = Sizzle,
 					div = document.createElement("div"),
@@ -5018,7 +5018,7 @@
 							}
 						}
 
-						if ( context.nodeType === 9 ) {
+						if ( context.nodeType === 9 ) { // 9是document
 							// Speed-up: Sizzle("body")
 							// The body element only exists once, optimize finding it
 							if ( query === "body" && context.body ) {
@@ -5050,7 +5050,7 @@
 							// We can work around this by specifying an extra ID on the root
 							// and working up from there (Thanks to Andrew Dupont for the technique)
 							// IE 8 doesn't work on object elements
-						} else if ( context.nodeType === 1 && context.nodeName.toLowerCase() !== "object" ) {
+						} else if ( context.nodeType === 1 && context.nodeName.toLowerCase() !== "object" ) { //上下文是某个指定的元素
 							var oldContext = context,
 								old = context.getAttribute( "id" ),
 								nid = old || id,
@@ -5092,8 +5092,8 @@
 			})();
 		}
 
-		(function(){
-			var html = document.documentElement,
+		(function(){ //检查元素是否满足选择器表达式
+			var html = document.documentElement, // 根元素html
 				matches = html.matchesSelector || html.mozMatchesSelector || html.webkitMatchesSelector || html.msMatchesSelector;
 
 			if ( matches ) {
