@@ -11,7 +11,7 @@
 <table border="1px solid black" cellpadding="0" cellspacing="0">
     <thead>
     <tr>
-        <th>jquery</th>
+        <th>jquery static</th>
         <th>jquery.prototype</th>
         <th>jquery对象</th>
     </tr>
@@ -22,6 +22,19 @@
 </table>
 </body>
 <script>
+//     static 方法扩展
+//	$.extend({
+//		xxx: function () {
+//			console.log('static xxx');
+//		}
+//	});
+//	// 原型方法扩展
+//	jQuery.fn.extend({
+//		yyy: function () {
+//			console.log('prototype yyy');
+//		}
+//	});
+
     var tbody = $("#tbody");
     var arr1 = [], arr2 = [], arr3 = [];
     for (var key in $) {

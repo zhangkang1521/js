@@ -3,15 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <title>jquery-extend-test</title>
-    <script src="./jquery-1.7.1-zk.js"></script>
+    <script src="jquery-1.7.1.js"></script>
     <script>
         // $.extend 扩展的方法内部使用$['xxx'] = function;，所以只能通过$.xxx()访问，不能通过$().xxx()访问
         $.extend({
         	xxx: function () {
-		        console.log('extend xxx');
+		        console.log('static xxx');
 	        }
         });
-//        $().xxx();
+        // 原型方法扩展
+        jQuery.fn.extend({
+	        yyy: function () {
+		        console.log('prototype yyy');
+	        }
+        });
+
+        $.xxx();
+        $().yyy();
+
         console.log($);
 
     </script>

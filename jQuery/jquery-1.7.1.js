@@ -3980,7 +3980,7 @@
 					}
 
 				} else {
-					checkSet = parts = [];
+					checkSet = parts = []; // line:3944 上下文都没找到，就没有再找的必要了
 				}
 			}
 
@@ -4248,8 +4248,8 @@
 				}
 			},
 
-			relative: {
-				"+": function(checkSet, part){
+			relative: { // 块间关系判断
+				"+": function(checkSet, part){ // 下一个兄弟结点
 					var isPartStr = typeof part === "string",
 						isTag = isPartStr && !rNonWord.test( part ),
 						isPartStrNotTag = isPartStr && !isTag;
@@ -4260,7 +4260,7 @@
 
 					for ( var i = 0, l = checkSet.length, elem; i < l; i++ ) {
 						if ( (elem = checkSet[i]) ) {
-							while ( (elem = elem.previousSibling) && elem.nodeType !== 1 ) {}
+							while ( (elem = elem.previousSibling) && elem.nodeType !== 1 ) {} // 过滤掉空白textNode
 
 							checkSet[i] = isPartStrNotTag || elem && elem.nodeName.toLowerCase() === part ?
 								elem || false :
@@ -4273,13 +4273,13 @@
 					}
 				},
 
-				">": function( checkSet, part ) {
+				">": function( checkSet, part ) { // 儿子结点
 					var elem,
 						isPartStr = typeof part === "string",
 						i = 0,
 						l = checkSet.length;
 
-					if ( isPartStr && !rNonWord.test( part ) ) {
+					if ( isPartStr && !rNonWord.test( part ) ) { // $('div > input') 判断parentNode是否是div
 						part = part.toLowerCase();
 
 						for ( ; i < l; i++ ) {
@@ -4291,7 +4291,7 @@
 							}
 						}
 
-					} else {
+					} else { // $('.red > input') 过滤.red
 						for ( ; i < l; i++ ) {
 							elem = checkSet[i];
 
@@ -4308,7 +4308,7 @@
 					}
 				},
 
-				"": function(checkSet, part, isXML){
+				"": function(checkSet, part, isXML){ // 子孙结点
 					var nodeCheck,
 						doneName = done++,
 						checkFn = dirCheck;
@@ -4322,7 +4322,7 @@
 					checkFn( "parentNode", part, doneName, checkSet, nodeCheck, isXML );
 				},
 
-				"~": function( checkSet, part, isXML ) {
+				"~": function( checkSet, part, isXML ) { // 后面的兄弟结点
 					var nodeCheck,
 						doneName = done++,
 						checkFn = dirCheck;
@@ -4984,7 +4984,7 @@
 			div = null;
 		})();
 
-		if ( document.querySelectorAll ) { // 优先使用浏览器内置的querySelectAll
+		/*if ( document.querySelectorAll ) { // 优先使用浏览器内置的querySelectAll
 			(function(){
 				var oldSizzle = Sizzle,
 					div = document.createElement("div"),
@@ -5090,7 +5090,7 @@
 				// release memory in IE
 				div = null;
 			})();
-		}
+		}*/
 
 		(function(){ //检查元素是否满足选择器表达式
 			var html = document.documentElement, // 根元素html
@@ -5136,7 +5136,7 @@
 			}
 		})();
 
-		(function(){
+		(function(){ // 检测是否支持getElementByClassName
 			var div = document.createElement("div");
 
 			div.innerHTML = "<div class='test e'></div><div class='test'></div>";
@@ -5289,7 +5289,7 @@
 // Override sizzle attribute retrieval
 		Sizzle.attr = jQuery.attr;
 		Sizzle.selectors.attrMap = {};
-		jQuery.find = Sizzle;
+		jQuery.find = Sizzle; // line:5319 是原型方法，这里是静态方法，注意区分
 		jQuery.expr = Sizzle.selectors;
 		jQuery.expr[":"] = jQuery.expr.filters;
 		jQuery.unique = Sizzle.uniqueSort;
@@ -5316,7 +5316,7 @@
 			prev: true
 		};
 
-	jQuery.fn.extend({
+	jQuery.fn.extend({ // 原型方法扩展，区别于jQuery.extend是静态方法扩展
 		find: function( selector ) {
 			var self = this,
 				i, l;
