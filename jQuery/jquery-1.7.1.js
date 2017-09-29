@@ -3913,7 +3913,7 @@
 				}
 			} while ( m );
 
-			if ( parts.length > 1 && origPOS.exec( selector ) ) {
+			if ( parts.length > 1 && origPOS.exec( selector ) ) { // 位置伪类，从左往右找
 
 				if ( parts.length === 2 && Expr.relative[ parts[0] ] ) {
 					set = posProcess( parts[0] + parts[1], context, seed );
@@ -4055,7 +4055,7 @@
 				return [];
 			}
 
-			for ( i = 0, len = Expr.order.length; i < len; i++ ) {
+			for ( i = 0, len = Expr.order.length; i < len; i++ ) { // ID CLASS NAME TAG
 				type = Expr.order[i];
 
 				if ( (match = Expr.leftMatch[ type ].exec( expr )) ) {
@@ -4064,7 +4064,7 @@
 
 					if ( left.substr( left.length - 1 ) !== "\\" ) {
 						match[1] = (match[1] || "").replace( rBackslash, "" );
-						set = Expr.find[ type ]( match, context, isXML );
+						set = Expr.find[ type ]( match, context, isXML ); // getElement ById ByClass ByName byTagName
 
 						if ( set != null ) {
 							expr = expr.replace( Expr.match[ type ], "" );
@@ -4111,7 +4111,7 @@
 						}
 
 						if ( Expr.preFilter[ type ] ) {
-							match = Expr.preFilter[ type ]( match, curLoop, inplace, result, not, isXMLFilter );
+							match = Expr.preFilter[ type ]( match, curLoop, inplace, result, not, isXMLFilter ); // 修正参数
 
 							if ( !match ) {
 								anyFound = found = true;
@@ -4219,7 +4219,7 @@
 		};
 
 		var Expr = Sizzle.selectors = {
-			order: [ "ID", "NAME", "TAG" ],
+			order: [ "ID", "NAME", "TAG" ], // line:5139 会检测浏览器是否支持getElementByClassName [ "ID", "CLASS", "NAME", "TAG" ]
 
 			match: {
 				ID: /#((?:[\w\u00c0-\uFFFF\-]|\\.)+)/,
@@ -4230,7 +4230,7 @@
 				CHILD: /:(only|nth|last|first)-child(?:\(\s*(even|odd|(?:[+\-]?\d+|(?:[+\-]?\d*)?n\s*(?:[+\-]\s*\d+)?))\s*\))?/,
 				POS: /:(nth|eq|gt|lt|first|last|even|odd)(?:\((\d*)\))?(?=[^\-]|$)/,
 				PSEUDO: /:((?:[\w\u00c0-\uFFFF\-]|\\.)+)(?:\((['"]?)((?:\([^\)]+\)|[^\(\)]*)+)\2\))?/
-			},
+			}, // line 4756 加上前缀，后缀
 
 			leftMatch: {},
 
@@ -4408,7 +4408,7 @@
 
 						match[2] = match[2].replace(/^\+|\s*/g, '');
 
-						// parse equations like 'even', 'odd', '5', '2n', '3n+2', '4n-1', '-n+6'
+						// parse equations like 'even', 'odd', '5', '2n', '3n+2', '4n-1', '-n+6' // 将even转换成2n+0
 						var test = /(-?)(\d*)(?:n([+\-]?\d*))?/.exec(
 							match[2] === "even" && "2n" || match[2] === "odd" && "2n+1" ||
 							!/\D/.test( match[2] ) && "0n+" + match[2] || match[2]);
@@ -4506,7 +4506,7 @@
 				},
 
 				has: function( elem, i, match ) {
-					return !!Sizzle( match[3], elem ).length;
+					return !!Sizzle( match[3], elem ).length; // $("div:has(a)")
 				},
 
 				header: function( elem ) {
@@ -4563,8 +4563,8 @@
 					return elem === elem.ownerDocument.activeElement;
 				}
 			},
-			setFilters: {
-				first: function( elem, i ) {
+			setFilters: { // POS过滤
+				first: function( elem, i ) { // :first
 					return i === 0;
 				},
 
@@ -4589,11 +4589,11 @@
 				},
 
 				nth: function( elem, i, match ) {
-					return match[3] - 0 === i;
+					return match[3] - 0 === i; // nth和eq效果一样
 				},
 
 				eq: function( elem, i, match ) {
-					return match[3] - 0 === i;
+					return match[3] - 0 === i; // match[3] 是 eq(3)里的3
 				}
 			},
 			filter: {
@@ -4631,7 +4631,7 @@
 						node = elem;
 
 					switch ( type ) {
-						case "only":
+						case "only": // 既是first，又是last，即是only
 						case "first":
 							while ( (node = node.previousSibling) )	 {
 								if ( node.nodeType === 1 ) {
@@ -4655,22 +4655,22 @@
 							return true;
 
 						case "nth":
-							first = match[2];
+							first = match[2]; // first*n + last
 							last = match[3];
 
-							if ( first === 1 && last === 0 ) {
+							if ( first === 1 && last === 0 ) { // $("a:nth-child(1n+0)")
 								return true;
 							}
 
 							doneName = match[0];
 							parent = elem.parentNode;
 
-							if ( parent && (parent[ expando ] !== doneName || !elem.nodeIndex) ) {
+							if ( parent && (parent[ expando ] !== doneName || !elem.nodeIndex) ) { // 不用每次进来都需要编号
 								count = 0;
 
 								for ( node = parent.firstChild; node; node = node.nextSibling ) {
 									if ( node.nodeType === 1 ) {
-										node.nodeIndex = ++count;
+										node.nodeIndex = ++count; // 给每个子元素编号，从1开始
 									}
 								}
 
@@ -4737,7 +4737,7 @@
 															false;
 				},
 
-				POS: function( elem, match, i, array ) {
+				POS: function( elem, match, i, array ) { // first last even odd ...
 					var name = match[2],
 						filter = Expr.setFilters[ name ];
 
@@ -4750,11 +4750,11 @@
 
 		var origPOS = Expr.match.POS,
 			fescape = function(all, num){
-				return "\\" + (num - 0 + 1);
+				return "\\" + (num - 0 + 1); // PSEUDO,ATTR ,leftMatch多了一个分组，所以+1
 			};
 
 		for ( var type in Expr.match ) {
-			Expr.match[ type ] = new RegExp( Expr.match[ type ].source + (/(?![^\[]*\])(?![^\(]*\))/.source) );
+			Expr.match[ type ] = new RegExp( Expr.match[ type ].source + (/(?![^\[]*\])(?![^\(]*\))/.source) ); // 加上这个后缀防止末尾多余的)]
 			Expr.leftMatch[ type ] = new RegExp( /(^(?:.|\r|\n)*?)/.source + Expr.match[ type ].source.replace(/\\(\d+)/g, fescape) );
 		}
 
@@ -5165,7 +5165,7 @@
 			div = null;
 		})();
 
-		function dirNodeCheck( dir, cur, doneName, checkSet, nodeCheck, isXML ) {
+		function dirNodeCheck( dir, cur, doneName, checkSet, nodeCheck, isXML ) { // 块间关系 "" ~ ，左边是标签，调用这个检查 $("div a"), dir是parentNode
 			for ( var i = 0, l = checkSet.length; i < l; i++ ) {
 				var elem = checkSet[i];
 
@@ -5175,7 +5175,7 @@
 					elem = elem[dir];
 
 					while ( elem ) {
-						if ( elem[ expando ] === doneName ) {
+						if ( elem[ expando ] === doneName ) { // ???
 							match = checkSet[elem.sizset];
 							break;
 						}
@@ -5198,7 +5198,7 @@
 			}
 		}
 
-		function dirCheck( dir, cur, doneName, checkSet, nodeCheck, isXML ) {
+		function dirCheck( dir, cur, doneName, checkSet, nodeCheck, isXML ) { // 块间关系 "" ~ ，左边不是标签，调用这个检查 $(".red a"), dir是parentNode, cur是.red
 			for ( var i = 0, l = checkSet.length; i < l; i++ ) {
 				var elem = checkSet[i];
 
@@ -5219,13 +5219,13 @@
 								elem.sizset = i;
 							}
 
-							if ( typeof cur !== "string" ) {
+							if ( typeof cur !== "string" ) { // cur传参可能是dom元素，直接比较相等，不需要filter
 								if ( elem === cur ) {
 									match = true;
 									break;
 								}
 
-							} else if ( Sizzle.filter( cur, [elem] ).length > 0 ) {
+							} else if ( Sizzle.filter( cur, [elem] ).length > 0 ) { // 满足条件
 								match = elem;
 								break;
 							}
