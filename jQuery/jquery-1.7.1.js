@@ -4059,10 +4059,10 @@
 				type = Expr.order[i];
 
 				if ( (match = Expr.leftMatch[ type ].exec( expr )) ) {
-					left = match[1];
+					left = match[1]; // 前缀正则匹配到的
 					match.splice( 1, 1 );
 
-					if ( left.substr( left.length - 1 ) !== "\\" ) {
+					if ( left.substr( left.length - 1 ) !== "\\" ) { // $(".test\\#id") 能匹配上ID，前缀正则匹配到最后一个字符是\ 说明是转义，并不是要根据ID找
 						match[1] = (match[1] || "").replace( rBackslash, "" );
 						set = Expr.find[ type ]( match, context, isXML ); // getElement ById ByClass ByName byTagName
 
@@ -4100,7 +4100,7 @@
 
 						anyFound = false;
 
-						match.splice(1,1);
+						match.splice(1,1); // 去掉前缀匹配的一个分组
 
 						if ( left.substr( left.length - 1 ) === "\\" ) {
 							continue;
@@ -4112,7 +4112,7 @@
 
 						if ( Expr.preFilter[ type ] ) {
 							match = Expr.preFilter[ type ]( match, curLoop, inplace, result, not, isXMLFilter ); // 修正参数
-
+							// false: 已经执行过滤，不需要再过滤，例如class；true:需要继续执行preFilter； 其他情况：可以调用filter
 							if ( !match ) {
 								anyFound = found = true;
 
@@ -4125,7 +4125,7 @@
 							for ( i = 0; (item = curLoop[i]) != null; i++ ) {
 								if ( item ) {
 									found = filter( item, match, i, curLoop );
-									pass = not ^ found;
+									pass = not ^ found; // 这就是异或的用途啊！！！取反
 
 									if ( inplace && found != null ) {
 										if ( pass ) {
@@ -4408,7 +4408,7 @@
 
 						match[2] = match[2].replace(/^\+|\s*/g, '');
 
-						// parse equations like 'even', 'odd', '5', '2n', '3n+2', '4n-1', '-n+6' // 将even转换成2n+0
+						// parse equations like 'even', 'odd', '5', '2n', '3n+2', '4n-1', '-n+6'
 						var test = /(-?)(\d*)(?:n([+\-]?\d*))?/.exec(
 							match[2] === "even" && "2n" || match[2] === "odd" && "2n+1" ||
 							!/\D/.test( match[2] ) && "0n+" + match[2] || match[2]);
@@ -4435,10 +4435,10 @@
 					}
 
 					// Handle if an un-quoted value was used
-					match[4] = ( match[4] || match[5] || "" ).replace( rBackslash, "" );
+					match[4] = ( match[4] || match[5] || "" ).replace( rBackslash, "" ); // 引号可有可无，属性名存放分组不同
 
 					if ( match[2] === "~=" ) {
-						match[4] = " " + match[4] + " ";
+						match[4] = " " + match[4] + " "; // line: 4717 用indexOf检查
 					}
 
 					return match;
@@ -4448,7 +4448,7 @@
 					if ( match[1] === "not" ) {
 						// If we're dealing with a complex expression, or a simple one
 						if ( ( chunker.exec(match[3]) || "" ).length > 1 || /^\w/.test(match[3]) ) {
-							match[3] = Sizzle(match[3], null, null, curLoop);
+							match[3] = Sizzle(match[3], null, null, curLoop); // line:4611 筛选出不在match[3]中的元素
 
 						} else {
 							var ret = Sizzle.filter(match[3], curLoop, inplace, true ^ not);
@@ -4461,14 +4461,14 @@
 						}
 
 					} else if ( Expr.match.POS.test( match[0] ) || Expr.match.CHILD.test( match[0] ) ) {
-						return true;
+						return true; // 匹配上了POS,CHILD，返回true代表不执行过滤函数，继续调用对应的预过滤
 					}
 
 					return match;
 				},
 
 				POS: function( match ) {
-					match.unshift( true );
+					match.unshift( true ); // 使下标与PSEUDO保持一致,match[3]
 
 					return match;
 				}
@@ -4608,7 +4608,7 @@
 						return (elem.textContent || elem.innerText || getText([ elem ]) || "").indexOf(match[3]) >= 0;
 
 					} else if ( name === "not" ) {
-						var not = match[3];
+						var not = match[3]; // 这里存的是not(selector)中，用selector找到的元素
 
 						for ( var j = 0, l = not.length; j < l; j++ ) {
 							if ( not[j] === elem ) {
