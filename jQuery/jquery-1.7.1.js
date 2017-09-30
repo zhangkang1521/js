@@ -3902,11 +3902,11 @@
 				m = chunker.exec( soFar );
 
 				if ( m ) {
-					soFar = m[3];
+					soFar = m[3]; // 分组3，剩余部分
 
-					parts.push( m[1] );
+					parts.push( m[1] ); // 分组1，块表达式
 
-					if ( m[2] ) {
+					if ( m[2] ) { // 分组2，逗号，并列选择
 						extra = m[3];
 						break;
 					}
@@ -4015,7 +4015,7 @@
 				makeArray( checkSet, results );
 			}
 
-			if ( extra ) {
+			if ( extra ) { // 存在并列表达式，递归调用
 				Sizzle( extra, origContext, results, seed );
 				Sizzle.uniqueSort( results );
 			}
