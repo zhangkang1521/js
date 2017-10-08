@@ -3,14 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <title>test</title>
-   <!-- <script src="jquery-1.7.1.js"></script>-->
-    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.1.js"></script>
+    <script src="jquery-1.7.1.js"></script>
+    <!--<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.1.js"></script>-->
 </head>
 <body>
-    <div id="outer"></div>
+	
+	<div id="a" class="red" style="visibility:hidden">
+		<div id="aa" >
+			<a id="a1" >a1</a>
+		</div>
+		<a id="a2">a2</a>
+	</div>
+	<div id="c" style="display:none">
+		ccc
+	</div>
+	
+
 </body>
 <script>
-    console.log($().jquery);
 
+	/*$.ajax({
+		url: 'http://localhost:9999',
+		success: myTest
+	});*/
+	
+	/*$.ajax('http://localhost:9999')
+	 .done(myTest1)
+	 //.done(myTest2);
+	 
+	
+	function myTest1(data){
+		console.log(1, data);
+		return false;
+	}
+	
+	function myTest2(data){
+		console.log(2, data);
+	}*/
+	
+	function test1(){
+		console.log('test1');
+	}
+	
+	function test2(){
+		console.log('test2');
+	}
+	
+	function test3(){
+		console.log('test2');
+	}
+	
+	var de = $.Deferred();
+	console.log(de);
+	
+	de.done(test1);
+	de.fail(test2);
+	de.progress(test3);
+	
+	de.resolve();
+	//de.resolve();
+	//de.reject();
+	//de.notify();
+	console.log(de.state());
+	
+
+	
+	
+	
+	
+	
+	
 </script>
 </html>
