@@ -994,7 +994,7 @@
 	 *
 	 */
 	jQuery.Callbacks = function( flags ) {
-
+		
 		// Convert flags from String-formatted to Object-formatted
 		// (we check in cache first)
 		flags = flags ? ( flagsCache[ flags ] || createFlags( flags ) ) : {};
@@ -1028,7 +1028,7 @@
 						add( elem );
 					} else if ( type === "function" ) {
 						// Add if not in unique mode and callback is not in
-						if ( !flags.unique || !self.has( elem ) ) {
+						if ( !flags.unique || !self.has( elem ) ) { // !(unique && has)
 							list.push( elem );
 						}
 					}
@@ -1037,7 +1037,7 @@
 			// Fire callbacks
 			fire = function( context, args ) {
 				args = args || [];
-				memory = !flags.memory || [ context, args ];
+				memory = !flags.memory || [ context, args ]; // 是memory模式，则memory记录参数，待line:1081行使用
 				firing = true;
 				firingIndex = firingStart || 0;
 				firingStart = 0;
@@ -1050,14 +1050,14 @@
 				}
 				firing = false;
 				if ( list ) {
-					if ( !flags.once ) {
+					if ( !flags.once ) { // 非once模式，line:1161，触发函数中调用fire,先暂存起来，再依次调用
 						if ( stack && stack.length ) {
-							memory = stack.shift();
+							memory = stack.shift(); // line:
 							self.fireWith( memory[ 0 ], memory[ 1 ] );
 						}
-					} else if ( memory === true ) {
+					} else if ( memory === true ) { // once + !memory 或 once+stopOnFalse 返回false
 						self.disable();
-					} else {
+					} else { // once + memory 清空list，后续添加的回调函数会立即执行
 						list = [];
 					}
 				}
@@ -1072,13 +1072,13 @@
 						// Do we need to add the callbacks to the
 						// current firing batch?
 						if ( firing ) {
-							firingLength = list.length;
+							firingLength = list.length; // 触发函数中添加，不论memory都立即触发
 							// With memory, if we're not firing then
 							// we should call right away, unless previous
 							// firing was halted (stopOnFalse)
 						} else if ( memory && memory !== true ) {
-							firingStart = length;
-							fire( memory[ 0 ], memory[ 1 ] );
+							firingStart = length; // 触发开始位置设置，保证只触发当前添加的函数
+							fire( memory[ 0 ], memory[ 1 ] ); // 是memory模式，并且触发过，添加函数时触发
 						}
 					}
 					return this;
@@ -1158,9 +1158,9 @@
 					if ( stack ) {
 						if ( firing ) {
 							if ( !flags.once ) {
-								stack.push( [ context, args ] );
+								stack.push( [ context, args ] ); // 触发函数中调用fire
 							}
-						} else if ( !( flags.once && memory ) ) {
+						} else if ( !( flags.once && memory ) ) { // 不是 once模式，且触发过
 							fire( context, args );
 						}
 					}
@@ -1265,7 +1265,7 @@
 				deferred[ key + "With" ] = lists[ key ].fireWith;
 			}
 
-			// Handle state
+			// Handle state 添加3个回调函数，更改状态，成功时将failList disable掉，将progressList lock
 			deferred.done( function() {
 				state = "resolved";
 			}, failList.disable, progressList.lock ).fail( function() {
@@ -3862,7 +3862,7 @@
 			done = 0,
 			toString = Object.prototype.toString,
 			hasDuplicate = false,
-			baseHasDuplicate = true,
+			baseHasDuplicate = true, // 先默认有重复元素，是否有重复元素，sort函数会判断，但如果存在优化，元素全部相等的情况下，sort函数不会调用，所以默认为true比较保险，3874行再做判断
 			rBackslash = /\\/g,
 			rReturn = /\r\n/g,
 			rNonWord = /\W/;
@@ -4039,11 +4039,11 @@
 
 			return results;
 		};
-
+		// 对set进行过滤，返回满足expr条件的元素集合
 		Sizzle.matches = function( expr, set ) {
 			return Sizzle( expr, null, null, set );
 		};
-
+		// 判断某个元素是否满足expr选择器表达式，可能使用原生的方法 line:5095
 		Sizzle.matchesSelector = function( node, expr ) {
 			return Sizzle( expr, null, null, [node] ).length > 0;
 		};
@@ -4189,7 +4189,7 @@
 				ret = "";
 
 			if ( nodeType ) {
-				if ( nodeType === 1 || nodeType === 9 ) {
+				if ( nodeType === 1 || nodeType === 9 ) { // element document
 					// Use textContent || innerText for elements
 					if ( typeof elem.textContent === 'string' ) {
 						return elem.textContent;
@@ -4202,7 +4202,7 @@
 							ret += getText( elem );
 						}
 					}
-				} else if ( nodeType === 3 || nodeType === 4 ) {
+				} else if ( nodeType === 3 || nodeType === 4 ) { // textNode, CDATA in xml
 					return elem.nodeValue;
 				}
 			} else {
@@ -4210,7 +4210,7 @@
 				// If no nodeType, this is expected to be an array
 				for ( i = 0; (node = elem[i]); i++ ) {
 					// Do not traverse comment nodes
-					if ( node.nodeType !== 8 ) {
+					if ( node.nodeType !== 8 ) { // 8: commentNode
 						ret += getText( node );
 					}
 				}
@@ -4510,7 +4510,7 @@
 				},
 
 				header: function( elem ) {
-					return (/h\d/i).test( elem.nodeName );
+					return (/h\d/i).test( elem.nodeName ); // h1 h2 ...
 				},
 
 				text: function( elem ) {
@@ -4721,9 +4721,9 @@
 							type === "=" ?
 								value === check :
 								type === "*=" ?
-									value.indexOf(check) >= 0 :
+									value.indexOf(check) >= 0 : //
 									type === "~=" ?
-										(" " + value + " ").indexOf(check) >= 0 :
+										(" " + value + " ").indexOf(check) >= 0 : // 区别于*=，必须是整个单词匹配
 										!check ?
 											value && result !== false :
 											type === "!=" ?
@@ -4733,7 +4733,7 @@
 													type === "$=" ?
 														value.substr(value.length - check.length) === check :
 														type === "|=" ?
-															value === check || value.substr(0, check.length + 1) === check + "-" :
+															value === check || value.substr(0, check.length + 1) === check + "-" : // 以xxx-开头也行
 															false;
 				},
 
@@ -4805,7 +4805,7 @@
 		var sortOrder, siblingCheck;
 
 		if ( document.documentElement.compareDocumentPosition ) {
-			sortOrder = function( a, b ) {
+			sortOrder = function( a, b ) { // 浏览器原生支持比较
 				if ( a === b ) {
 					hasDuplicate = true;
 					return 0;
@@ -4867,15 +4867,15 @@
 				bl = bp.length;
 
 				// Start walking down the tree looking for a discrepancy
-				for ( var i = 0; i < al && i < bl; i++ ) {
-					if ( ap[i] !== bp[i] ) {
+				for ( var i = 0; i < al && i < bl; i++ ) {// 从最顶层祖先开始找
+					if ( ap[i] !== bp[i] ) { // 不是相同元素，必定是兄弟元素
 						return siblingCheck( ap[i], bp[i] );
 					}
 				}
 
 				// We ended someplace up the tree so do a sibling check
 				return i === al ?
-					siblingCheck( a, bp[i], -1 ) :
+					siblingCheck( a, bp[i], -1 ) : // a的深度小，a与bp[i]
 					siblingCheck( ap[i], b, 1 );
 			};
 
@@ -5092,7 +5092,7 @@
 			})();
 		}*/
 
-		(function(){ //检查元素是否满足选择器表达式
+		(function(){ // 检查浏览器是否支持原生的matchSelector
 			var html = document.documentElement, // 根元素html
 				matches = html.matchesSelector || html.mozMatchesSelector || html.webkitMatchesSelector || html.msMatchesSelector;
 
@@ -5111,7 +5111,7 @@
 					pseudoWorks = true;
 				}
 
-				Sizzle.matchesSelector = function( node, expr ) {
+				Sizzle.matchesSelector = function( node, expr ) { 
 					// Make sure that attribute selectors are quoted
 					expr = expr.replace(/\=\s*([^'"\]]*)\s*\]/g, "='$1']");
 
@@ -5238,7 +5238,7 @@
 				}
 			}
 		}
-
+		// contains方法暴露给jQuery静态方法 line:5288
 		if ( document.documentElement.contains ) {
 			Sizzle.contains = function( a, b ) {
 				return a !== b && (a.contains ? a.contains(b) : true);
@@ -5379,11 +5379,11 @@
 						// If this is a positional selector, check membership in the returned set
 						// so $("p:first").is("p:last") won't return true for a doc with two "p".
 						POS.test( selector ) ?
-							jQuery( selector, this.context ).index( this[0] ) >= 0 :
-							jQuery.filter( selector, this ).length > 0 :
+							jQuery( selector, this.context ).index( this[0] ) >= 0 : // Sizzle('p:first', this.context, null, null)
+							jQuery.filter( selector, this ).length > 0 : // Sizzle('p:first', null, null, this)
 						this.filter( selector ).length > 0 );
 		},
-
+		// 当前元素或祖先元素中与selectors匹配最近的元素，区分于parent
 		closest: function( selectors, context ) {
 			var ret = [], i, l, cur = this[0];
 
@@ -5594,18 +5594,18 @@
 		// Set to 0 to skip string check
 		qualifier = qualifier || 0;
 
-		if ( jQuery.isFunction( qualifier ) ) {
+		if ( jQuery.isFunction( qualifier ) ) { // 函数
 			return jQuery.grep(elements, function( elem, i ) {
 				var retVal = !!qualifier.call( elem, i, elem );
 				return retVal === keep;
 			});
 
-		} else if ( qualifier.nodeType ) {
+		} else if ( qualifier.nodeType ) { // DOM元素
 			return jQuery.grep(elements, function( elem, i ) {
 				return ( elem === qualifier ) === keep;
 			});
 
-		} else if ( typeof qualifier === "string" ) {
+		} else if ( typeof qualifier === "string" ) { // 选择器表达式
 			var filtered = jQuery.grep(elements, function( elem ) {
 				return elem.nodeType === 1;
 			});
@@ -5616,7 +5616,7 @@
 				qualifier = jQuery.filter( qualifier, filtered );
 			}
 		}
-
+		// 
 		return jQuery.grep(elements, function( elem, i ) {
 			return ( jQuery.inArray( elem, qualifier ) >= 0 ) === keep;
 		});
