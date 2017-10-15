@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Deferred</title>
+    <script src="jquery-1.7.1.js"></script>
+</head>
+<body>
+
+</body>
+<script>
+    function testDone(){
+        console.log('test done');
+    }
+
+    function testFail(){
+        console.log('test fail');
+    }
+
+    function testNotify(){
+        console.log('test notify');
+    }
+
+    var de = $.Deferred();
+
+    de.done(testDone);
+    de.fail(testFail);
+    de.progress(testNotify);
+
+    de.notify();
+    de.resolve();
+
+    de.progress(function () {
+        console.log('after lock notify'); // lock之后，还可以往回调函数列表添加函数，并会立即触发
+    });
+    de.notify(); // 这里并不会触发执行，已经lock
+</script>
+</html>

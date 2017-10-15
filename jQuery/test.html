@@ -41,37 +41,29 @@
 		console.log(2, data);
 	}*/
 	
-	function test1(){
-		console.log('test1');
+	function test1(arg){
+		console.log('test1:', arg);
 	}
 	
-	function test2(){
-		console.log('test2');
+	function test2(arg){
+		console.log('test2', arg);
 	}
-	
-	function test3(){
-		console.log('test2');
-	}
-	
 	var de = $.Deferred();
-	console.log(de);
-	
-	de.done(test1);
-	de.fail(test2);
-	de.progress(test3);
-	
-	de.resolve();
-	//de.resolve();
-	//de.reject();
-	//de.notify();
-	console.log(de.state());
-	
 
-	
-	
-	
-	
-	
-	
+
+	var filter = de.pipe(function (value) {
+	    console.log('filter');
+		return value * 2;
+    });
+
+    //de.done(test1);
+    de.resolve(5); // 原来队列的doneList执行
+	filter.done(test1);
+	//filter.done(test2);
+
+
+
+
+
 </script>
 </html>

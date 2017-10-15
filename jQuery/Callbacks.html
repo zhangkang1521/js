@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Callbacks</title>
+    <script src="jquery-1.7.1.js"></script>
+</head>
+<body>
+
+</body>
+<script>
+    function test1(args) {
+        console.log('test1', arguments);
+    }
+
+
+    // once: 只会触发一次；memory:记住上次触发的参数，fire之后add后会马上触发
+    var callback = $.Callbacks('once memory');
+    callback.add(test1);
+    callback.fire('hello');
+
+    callback.add(function () {
+        console.log('fire之后，添加的函数会立即执行！')
+    });
+</script>
+</html>

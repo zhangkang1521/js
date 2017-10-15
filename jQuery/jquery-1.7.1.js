@@ -1231,13 +1231,13 @@
 									returned;
 								if ( jQuery.isFunction( fn ) ) {
 									deferred[ handler ](function() {
-										returned = fn.apply( this, arguments );
+										returned = fn.apply( this, arguments ); // 执行filter函数
 										if ( returned && jQuery.isFunction( returned.promise ) ) {
 											returned.promise().then( newDefer.resolve, newDefer.reject, newDefer.notify );
 										} else {
-											newDefer[ action + "With" ]( this === deferred ? newDefer : this, [ returned ] );
+											newDefer[ action + "With" ]( this === deferred ? newDefer : this, [ returned ] ); // 触发新异步队列的方法
 										}
-									});
+									}); // 原来的异步队列上添加回调函数
 								} else {
 									deferred[ handler ]( newDefer[ action ] );
 								}
@@ -1265,7 +1265,7 @@
 				deferred[ key + "With" ] = lists[ key ].fireWith;
 			}
 
-			// Handle state 添加3个回调函数，更改状态，成功时将failList disable掉，将progressList lock
+			// Handle state 添加3个回调函数，更改状态，成功时将failList disable掉，将progressList lock，锁定的目的防止done或fail之后，notify再次触发
 			deferred.done( function() {
 				state = "resolved";
 			}, failList.disable, progressList.lock ).fail( function() {
