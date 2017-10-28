@@ -1280,7 +1280,7 @@
 			// All done!
 			return deferred;
 		},
-
+		// 参数：1.多个异步队列：返回一个新建的主异步队列，所有子异步队列成功，则执行主异步队列的成功函数；有一个子异步队列失败，则主异步队列执行失败回调函数 2.单个异步队列：返回这个异步队列的promise() 3.非异步队列：立即执行成功回调函数
 		// Deferred helper
 		when: function( firstParam ) {
 			var args = sliceDeferred.call( arguments, 0 ),
@@ -1296,7 +1296,7 @@
 			function resolveFunc( i ) {
 				return function( value ) {
 					args[ i ] = arguments.length > 1 ? sliceDeferred.call( arguments, 0 ) : value;
-					if ( !( --count ) ) {
+					if ( !( --count ) ) { // 子队列所有函数成功，执行when的成功函数
 						deferred.resolveWith( deferred, args );
 					}
 				};
@@ -1310,7 +1310,7 @@
 			if ( length > 1 ) {
 				for ( ; i < length; i++ ) {
 					if ( args[ i ] && args[ i ].promise && jQuery.isFunction( args[ i ].promise ) ) {
-						args[ i ].promise().then( resolveFunc(i), deferred.reject, progressFunc(i) );
+						args[ i ].promise().then( resolveFunc(i), deferred.reject, progressFunc(i) ); //给每个子队列添加回调函数
 					} else {
 						--count;
 					}
