@@ -1663,7 +1663,7 @@
 
 				// Only defining an ID for JS objects if its cache already exists allows
 				// the code to shortcut on the same path as a DOM node with no cache
-				id = isNode ? elem[ internalKey ] : elem[ internalKey ] && internalKey,
+				id = isNode ? elem[ internalKey ] : elem[ internalKey ] && internalKey, // js object 存在element[internalKey] 则返回internalKey
 				isEvents = name === "events";
 
 			// Avoid doing any more work than we need to when trying to get data on an
