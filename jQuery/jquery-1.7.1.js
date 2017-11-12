@@ -1712,11 +1712,11 @@
 					thisCache.data = {};
 				}
 
-				thisCache = thisCache.data;
+				thisCache = thisCache.data; // 不是private，thisCache指向data
 			}
 
 			if ( data !== undefined ) {
-				thisCache[ jQuery.camelCase( name ) ] = data;
+				thisCache[ jQuery.camelCase( name ) ] = data; // 设值，thisCache已指向正确
 			}
 
 			// Users should not attempt to inspect the internal events object using jQuery.data,
@@ -1739,7 +1739,7 @@
 					ret = thisCache[ jQuery.camelCase( name ) ];
 				}
 			} else {
-				ret = thisCache;
+				ret = thisCache; // 没传name参数，返回所有
 			}
 
 			return ret;

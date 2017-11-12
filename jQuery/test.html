@@ -7,49 +7,33 @@
     <!--<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.1.js"></script>-->
 </head>
 <body>
-	<div>
-		<button onclick="d1.resolve(1, 2)">d1 success</button>
-		<button onclick="d1.reject(1, 2)">d1 fail</button>
-		<button onclick="d1.notify(1, 2)">d1 notify</button>
+	<div id="a">
+		aaa
 	</div>
-	<div>
-		<button onclick="d2.resolve(3, 4)">d2 success</button>
-		<button onclick="d2.reject(3, 4)">d2 fail</button>
-		<button onclick="d2.notify(3, 4)">d2 notify</button>
-	</div>
-
 
 </body>
 <script>
-	var whenDone = function () {
-		console.log('done', arguments);
-    };
-	var whenFail = function () {
-		console.log('fail', arguments);
-    };
-    var whenProgress = function () {
-        console.log('progress', arguments);
-    };
 
-	var d1 = $.Deferred();
-	d1.done(function () {
-		console.log('d1 success!');
-    }).fail(function () {
-		console.log('d1 fail!');
-    });
+	var $a = $("#a");
+	var a = $a.get(0);
+	$.data(a, "foo", "hello");
 
-    var d2 = $.Deferred();
-    d2.done(function () {
-        console.log('d2 success!');
-    }).fail(function () {
-		console.log('d2 fail!');
-    });
+	var myObj = {
+	    username: 'zk'
+    };
+	$.data(myObj, 'age-x' , 20);
 
-    // when的原理是创建一个主队列，给每个子队列都添加回调函数
-	var wh = $.when(); // 返回Deferred
-	wh.done(whenDone); // 所有子队列成功则触发
-	wh.fail(whenFail); // 有一个子队列失败则触发
-	wh.progress(whenProgress); // 子队列触发则触发
+	//console.log($.data(myObj, 'age'));
+
+	console.log($.data(myObj, 'age-x'));
+
+    console.log(myObj);
+
+    var elem = {
+        a: 'xxx'
+    };
+    console.log(elem[ 'a' ] && 'b');
+
 
 </script>
 </html>
