@@ -7,7 +7,7 @@
     <!--<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.1.js"></script>-->
 </head>
 <body>
-	<div id="a">
+	<div id="a" data-app-id='{"city":"chengdu","author":20}'>
 		aaa
 	</div>
 
@@ -16,23 +16,10 @@
 
 	var $a = $("#a");
 	var a = $a.get(0);
-	$.data(a, "foo", "hello");
 
-	var myObj = {
-	    username: 'zk'
-    };
-	$.data(myObj, 'age-x' , 20);
-
-	//console.log($.data(myObj, 'age'));
-
-	console.log($.data(myObj, 'age-x'));
-
-    console.log(myObj);
-
-    var elem = {
-        a: 'xxx'
-    };
-    console.log(elem[ 'a' ] && 'b');
+	$a.data("username", "zk");
+	console.log($a.data("appId"));
+	console.log($.cache);
 
 
 </script>

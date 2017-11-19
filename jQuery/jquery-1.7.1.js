@@ -1617,7 +1617,7 @@
 
 
 
-	var rbrace = /^(?:\{.*\}|\[.*\])$/,
+	var rbrace = /^(?:\{.*\}|\[.*\])$/, // 简单测试下是否是json, {xxx} [xxx]
 		rmultiDash = /([A-Z])/g;
 
 	jQuery.extend({
@@ -1865,10 +1865,10 @@
 		data: function( key, value ) {
 			var parts, attr, name,
 				data = null;
-
+            // 未传入任何参数，返回第一个匹配元素的自定义缓存数据，和data-*中的数据
 			if ( typeof key === "undefined" ) {
 				if ( this.length ) {
-					data = jQuery.data( this[0] );
+					data = jQuery.data( this[0] ); // 自定义的缓存数据
 
 					if ( this[0].nodeType === 1 && !jQuery._data( this[0], "parsedAttrs" ) ) {
 						attr = this[0].attributes;
@@ -1878,7 +1878,7 @@
 							if ( name.indexOf( "data-" ) === 0 ) {
 								name = jQuery.camelCase( name.substring(5) );
 
-								dataAttr( this[0], name, data[ name ] );
+								dataAttr( this[0], name, data[ name ] ); // 解析data-*中的数据
 							}
 						}
 						jQuery._data( this[0], "parsedAttrs", true );
@@ -1886,7 +1886,7 @@
 				}
 
 				return data;
-
+				// key是对象，为匹配的元素批量设置数据
 			} else if ( typeof key === "object" ) {
 				return this.each(function() {
 					jQuery.data( this, key );
@@ -1895,20 +1895,20 @@
 
 			parts = key.split(".");
 			parts[1] = parts[1] ? "." + parts[1] : "";
-
+			// 仅传入key, 获取key对应的数据
 			if ( value === undefined ) {
-				data = this.triggerHandler("getData" + parts[1] + "!", [parts[0]]);
+				data = this.triggerHandler("getData" + parts[1] + "!", [parts[0]]); // ???
 
 				// Try to fetch any internally stored data first
 				if ( data === undefined && this.length ) {
 					data = jQuery.data( this[0], key );
-					data = dataAttr( this[0], key, data );
+					data = dataAttr( this[0], key, data ); // 自定义数据中未找到，到data-*中找
 				}
 
 				return data === undefined && parts[1] ?
 					this.data( parts[0] ) :
 					data;
-
+			// 传入key,value,为每个匹配到的元素设置key value
 			} else {
 				return this.each(function() {
 					var self = jQuery( this ),
@@ -1927,17 +1927,17 @@
 			});
 		}
 	});
-
+	// 解析元素elem中data-key中存储的数据
 	function dataAttr( elem, key, data ) {
 		// If nothing was found internally, try to fetch any
 		// data from the HTML5 data-* attribute
 		if ( data === undefined && elem.nodeType === 1 ) {
 
-			var name = "data-" + key.replace( rmultiDash, "-$1" ).toLowerCase();
+			var name = "data-" + key.replace( rmultiDash, "-$1" ).toLowerCase(); // 大写转换成 "-小写"
 
 			data = elem.getAttribute( name );
 
-			if ( typeof data === "string" ) {
+			if ( typeof data === "string" ) { // 转换成合适的类型
 				try {
 					data = data === "true" ? true :
 						data === "false" ? false :
