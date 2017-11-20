@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>数据缓存</title>
+    <script src="jquery-1.7.1.js"></script>
+    <!--<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.1.js"></script>-->
+</head>
+<body>
+	<div id="a"></div>
+
+</body>
+<script>
+
+	// dom 存储id，数据存在$.cache中
+	var $a = $("#a");
+	var a = $a.get(0);
+
+	$.data(a, "username", "zk"); //
+	$.data(a, "age", 20, true); // private
+
+	console.log(a[$.expando]);
+	console.log($.cache);
+
+	// js对象，直接存在对象中
+	var obj = {
+		city: 'anqing'
+	};
+	$.data(obj, "car", "晥H");
+	$.data(obj, "year", 200, true);
+	console.log(obj);
+
+
+
+</script>
+</html>

@@ -1638,7 +1638,7 @@
 			"object": "clsid:D27CDB6E-AE6D-11cf-96B8-444553540000",
 			"applet": true
 		},
-
+		// 判断是否有关联数据
 		hasData: function( elem ) {
 			elem = elem.nodeType ? jQuery.cache[ elem[jQuery.expando] ] : elem[ jQuery.expando ];
 			return !!elem && !isEmptyDataObject( elem );
@@ -1744,7 +1744,7 @@
 
 			return ret;
 		},
-
+		// 删除数据，name可以是数组，或空格分隔
 		removeData: function( elem, name, pvt /* Internal Use Only */ ) {
 			if ( !jQuery.acceptData( elem ) ) {
 				return;
@@ -1788,7 +1788,7 @@
 							if ( name in thisCache ) {
 								name = [ name ];
 							} else {
-								name = name.split( " " );
+								name = name.split( " " ); // 支持空格
 							}
 						}
 					}
@@ -1799,8 +1799,8 @@
 
 					// If there is no data left in the cache, we want to continue
 					// and let the cache object itself get destroyed
-					if ( !( pvt ? isEmptyDataObject : jQuery.isEmptyObject )( thisCache ) ) {
-						return;
+					if ( !( pvt ? isEmptyDataObject : jQuery.isEmptyObject )( thisCache ) ) { // 选择不同函数判断
+						return; // 不为空，可以返回，为空，后面需要删除
 					}
 				}
 			}
@@ -6375,7 +6375,7 @@
 
 			return ret;
 		},
-
+		// 清除数据
 		cleanData: function( elems ) {
 			var data, id,
 				cache = jQuery.cache,
@@ -6391,7 +6391,7 @@
 
 				if ( id ) {
 					data = cache[ id ];
-
+					// 移除绑定的事件
 					if ( data && data.events ) {
 						for ( var type in data.events ) {
 							if ( special[ type ] ) {
@@ -6408,14 +6408,14 @@
 							data.handle.elem = null;
 						}
 					}
-
+					// 删除节点上的id
 					if ( deleteExpando ) {
 						delete elem[ jQuery.expando ];
 
 					} else if ( elem.removeAttribute ) {
 						elem.removeAttribute( jQuery.expando );
 					}
-
+					// 删除数据
 					delete cache[ id ];
 				}
 			}
