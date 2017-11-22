@@ -1981,19 +1981,19 @@
 		var deferDataKey = type + "defer",
 			queueDataKey = type + "queue",
 			markDataKey = type + "mark",
-			defer = jQuery._data( elem, deferDataKey );
+			defer = jQuery._data( elem, deferDataKey ); // promise中存入
 		if ( defer &&
-			( src === "queue" || !jQuery._data(elem, queueDataKey) ) &&
+			( src === "queue" || !jQuery._data(elem, queueDataKey) ) && // src传入queue，代表队列已空，不需要再用$_data判断
 			( src === "mark" || !jQuery._data(elem, markDataKey) ) ) {
 			// Give room for hard-coded callbacks to fire first
 			// and eventually mark/queue something else on the element
 			setTimeout( function() {
 				if ( !jQuery._data( elem, queueDataKey ) &&
-					!jQuery._data( elem, markDataKey ) ) {
+					!jQuery._data( elem, markDataKey ) ) { // queue,mark都已清零
 					jQuery.removeData( elem, deferDataKey, true );
 					defer.fire();
 				}
-			}, 0 );
+			}, 0 ); // 用意：
 		}
 	}
 
@@ -2024,7 +2024,7 @@
 				}
 			}
 		},
-
+		// 队列入队
 		queue: function( elem, type, data ) {
 			var q;
 			if ( elem ) {
@@ -2033,7 +2033,7 @@
 
 				// Speed up dequeue by getting out quickly if this is just a lookup
 				if ( data ) {
-					if ( !q || jQuery.isArray(data) ) {
+					if ( !q || jQuery.isArray(data) ) { // data是数组，覆盖当前队列
 						q = jQuery._data( elem, type, jQuery.makeArray(data) );
 					} else {
 						q.push( data );
@@ -2042,7 +2042,7 @@
 				return q || [];
 			}
 		},
-
+		// 队列出队并执行
 		dequeue: function( elem, type ) {
 			type = type || "fx";
 
@@ -2065,7 +2065,7 @@
 				jQuery._data( elem, type + ".run", hooks );
 				fn.call( elem, function() {
 					jQuery.dequeue( elem, type );
-				}, hooks );
+				}, hooks ); // 回调
 			}
 
 			if ( !queue.length ) {
@@ -2087,7 +2087,7 @@
 			}
 			return this.each(function() {
 				var queue = jQuery.queue( this, type, data );
-
+				// 动画队列，自动执行
 				if ( type === "fx" && queue[0] !== "inprogress" ) {
 					jQuery.dequeue( this, type );
 				}
@@ -2104,7 +2104,7 @@
 			time = jQuery.fx ? jQuery.fx.speeds[ time ] || time : time;
 			type = type || "fx";
 
-			return this.queue( type, function( next, hooks ) {
+			return this.queue( type, function( next, hooks ) { // 向队列中插入一个新函数，延迟下一个函数的执行时间
 				var timeout = setTimeout( next, time );
 				hooks.stop = function() {
 					clearTimeout( timeout );
@@ -2122,17 +2122,17 @@
 				type = undefined;
 			}
 			type = type || "fx";
-			var defer = jQuery.Deferred(),
+			var defer = jQuery.Deferred(), // 异步队列
 				elements = this,
 				i = elements.length,
-				count = 1,
+				count = 1, // 计数器
 				deferDataKey = type + "defer",
 				queueDataKey = type + "queue",
 				markDataKey = type + "mark",
 				tmp;
 			function resolve() {
 				if ( !( --count ) ) {
-					defer.resolveWith( elements, [ elements ] );
+					defer.resolveWith( elements, [ elements ] ); // fireWith(context, arguments)
 				}
 			}
 			while( i-- ) {
@@ -2141,7 +2141,7 @@
 						jQuery.data( elements[ i ], markDataKey, undefined, true ) ) &&
 						jQuery.data( elements[ i ], deferDataKey, jQuery.Callbacks( "once memory" ), true ) )) {
 					count++;
-					tmp.add( resolve );
+					tmp.add( resolve ); // 在handleQueueMarkDefer中fire
 				}
 			}
 			resolve();
