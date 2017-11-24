@@ -1327,7 +1327,7 @@
 
 
 
-
+	// 浏览器功能测试
 	jQuery.support = (function() {
 
 		var support,
@@ -1365,15 +1365,15 @@
 
 		support = {
 			// IE strips leading whitespace when .innerHTML is used
-			leadingWhitespace: ( div.firstChild.nodeType === 3 ),
+			leadingWhitespace: ( div.firstChild.nodeType === 3 ), // 是否保留前导空白, 3 textNode，说明保留前导空白
 
 			// Make sure that tbody elements aren't automatically inserted
 			// IE will insert them into empty tables
-			tbody: !div.getElementsByTagName("tbody").length,
+			tbody: !div.getElementsByTagName("tbody").length, // 空的table可以单独存在，不自动加上tbody
 
 			// Make sure that link elements get serialized correctly by innerHTML
 			// This requires a wrapper element in IE
-			htmlSerialize: !!div.getElementsByTagName("link").length,
+			htmlSerialize: !!div.getElementsByTagName("link").length, // 是否能通过innerHTML序列化link
 
 			// Get the style information from getAttribute
 			// (IE uses .cssText instead)
@@ -1381,7 +1381,7 @@
 
 			// Make sure that URLs aren't manipulated
 			// (IE normalizes it by default)
-			hrefNormalized: ( a.getAttribute("href") === "/a" ),
+			hrefNormalized: ( a.getAttribute("href") === "/a" ), // 没有格式化href为全路径，则为true
 
 			// Make sure that element opacity exists
 			// (IE uses filter instead)
@@ -1424,12 +1424,12 @@
 
 		// Make sure checked status is properly cloned
 		input.checked = true;
-		support.noCloneChecked = input.cloneNode( true ).checked;
+		support.noCloneChecked = input.cloneNode( true ).checked; // 复制dom元素时会复制选中状态，则为true,IE不会复制选中状态
 
 		// Make sure that the options inside disabled selects aren't marked as disabled
 		// (WebKit marks them as disabled)
 		select.disabled = true;
-		support.optDisabled = !opt.disabled;
+		support.optDisabled = !opt.disabled; // 禁用select,option不会被禁用，则为true
 
 		// Test to see if it's possible to delete an expando from an element
 		// Fails in Internet Explorer
@@ -1453,7 +1453,7 @@
 		input = document.createElement("input");
 		input.value = "t";
 		input.setAttribute("type", "radio");
-		support.radioValue = input.value === "t";
+		support.radioValue = input.value === "t"; // 设置input为radio不会丢失value
 
 		input.setAttribute("checked", "checked");
 		div.appendChild( input );
@@ -1484,7 +1484,7 @@
 			div.style.width = "2px";
 			div.appendChild( marginDiv );
 			support.reliableMarginRight =
-				( parseInt( ( window.getComputedStyle( marginDiv, null ) || { marginRight: 0 } ).marginRight, 10 ) || 0 ) === 0;
+				( parseInt( ( window.getComputedStyle( marginDiv, null ) || { marginRight: 0 } ).marginRight, 10 ) || 0 ) === 0; // parsetInt('0px', 10) 解析成10进制数
 		}
 
 		// Technique from Juriy Zaytsev
@@ -1514,7 +1514,7 @@
 		// Null elements to avoid leaks in IE
 		fragment = select = opt = marginDiv = div = input = null;
 
-		// Run tests that need a body at doc ready
+		// Run tests that need a body at doc ready 文档加载完成后检测
 		jQuery(function() {
 			var container, outer, inner, table, td, offsetSupport,
 				conMarginTop, ptlm, vb, style, html,
@@ -1557,12 +1557,12 @@
 
 			// Check if empty table cells still have offsetWidth/Height
 			// (IE <= 8 fail this test)
-			support.reliableHiddenOffsets = isSupported && ( tds[ 0 ].offsetHeight === 0 );
+			support.reliableHiddenOffsets = isSupported && ( tds[ 0 ].offsetHeight === 0 ); // 空单元格的可见高度为0，ie<=8是1
 
 			// Figure out if the W3C box model works as expected
 			div.innerHTML = "";
 			div.style.width = div.style.paddingLeft = "1px";
-			jQuery.boxModel = support.boxModel = div.offsetWidth === 2;
+			jQuery.boxModel = support.boxModel = div.offsetWidth === 2; // 是否支持盒模型
 
 			if ( typeof div.style.zoom !== "undefined" ) {
 				// Check if natively block-level elements act like inline-block
@@ -6816,8 +6816,8 @@
 	if ( jQuery.expr && jQuery.expr.filters ) {
 		jQuery.expr.filters.hidden = function( elem ) {
 			var width = elem.offsetWidth,
-				height = elem.offsetHeight;
-
+				height = elem.offsetHeight; // 可见高度
+			// 可见高度为0，可认为是不可见，但ie<=8，offsetHeight不可靠
 			return ( width === 0 && height === 0 ) || (!jQuery.support.reliableHiddenOffsets && ((elem.style && elem.style.display) || jQuery.css( elem, "display" )) === "none");
 		};
 

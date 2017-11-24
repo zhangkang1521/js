@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jquery.support</title>
+    <script src="jquery-1.7.1.js"></script>
+    <!--<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.1.js"></script>-->
+</head>
+<body>
+<h2>浏览器功能测试</h2>
+<table border="1">
+    <thead>
+    <tr>
+        <th>测试项</th>
+        <th>结果</th>
+    </tr>
+    </thead>
+    <tbody id="tbody">
+
+    </tbody>
+</table>
+</body>
+<script>
+    $(function () {
+	    var result = '', count = 0;
+	    for(var key in $.support) {
+		    result += '<tr><td>' + key + '</td><td>' + $.support[key] +'</td></tr>';
+		    count++;
+	    }
+	    $("#tbody").html(result);
+	    $('body').append(count);
+    });
+
+</script>
+</html>

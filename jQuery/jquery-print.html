@@ -8,7 +8,8 @@
 </head>
 <body>
 <div id="outer"></div>
-<table border="1px solid black" cellpadding="0" cellspacing="0">
+<h2>jquery方法一览</h2>
+<table border="1">
     <thead>
     <tr>
         <th>jquery static</th>
@@ -22,55 +23,40 @@
 </table>
 </body>
 <script>
-//     static 方法扩展
-//	$.extend({
-//		xxx: function () {
-//			console.log('static xxx');
-//		}
-//	});
-//	// 原型方法扩展
-//	jQuery.fn.extend({
-//		yyy: function () {
-//			console.log('prototype yyy');
-//		}
-//	});
 
-    var tbody = $("#tbody");
-    var arr1 = [], arr2 = [], arr3 = [];
-    for (var key in $) {
-        arr1.push(key);
-    }
-    for (var key in $.prototype) {
-        arr2.push(key);
-    }
-    var jqueryObj = $("outer");
-    console.log(jqueryObj);
-    for (var key in jqueryObj) {
-        arr3.push(key);
-    }
-//    console.log(arr1);
-//    console.log(arr2);
-//    console.log(arr3);
+    $(function () {
+	    var tbody = $("#tbody");
+	    var arr1 = [], arr2 = [], arr3 = [];
+	    for (var key in $) {
+		    arr1.push(key);
+	    }
+	    for (var key in $.prototype) {
+		    arr2.push(key);
+	    }
+	    var jqueryObj = $("#outer");
+	    console.log(jqueryObj);
+	    for (var key in jqueryObj) {
+		    arr3.push(key);
+	    }
 
-    var len = Math.max(arr1.length, arr2.length, arr3.length);
-    for (var i = 0; i < len; i++) {
-        var jqueryEle = arr1[i] ? '<td>' + arr1[i] + '</td>' : '<td></td>';
-        var jqueryPropEle = arr2[i] ? '<td>' + arr2[i] + '</td>' : '<td></td>';
-        var isOwn = jqueryObj.hasOwnProperty(arr3[i]);
-        if(isOwn) {
-            var jqueryObjEle = '<td style="color: red">' + arr3[i] + '</td>';
-        } else {
-            var jqueryObjEle = '<td>' + arr3[i] + '</td>';
-        }
+	    var len = Math.max(arr1.length, arr2.length, arr3.length);
+	    var temp = '';
+	    for (var i = 0; i < len; i++) {
+		    var jqueryEle = arr1[i] ? '<td>' + arr1[i] + '</td>' : '<td></td>';
+		    var jqueryPropEle = arr2[i] ? '<td>' + arr2[i] + '</td>' : '<td></td>';
+		    var isOwn = jqueryObj.hasOwnProperty(arr3[i]);
+		    if(isOwn) {
+			    var jqueryObjEle = '<td style="color: red">' + arr3[i] + '</td>';
+		    } else {
+			    var jqueryObjEle = '<td>' + arr3[i] + '</td>';
+		    }
 
-        var temp = '<tr>' + jqueryEle + jqueryPropEle + jqueryObjEle + '</tr>';
-        tbody.append(temp);
-    }
-    tbody.append('<tr><td>' + arr1.length + '</td><td>'+arr2.length+'</td><td>'+arr3.length+'</td></tr>');
+		    temp += '<tr>' + jqueryEle + jqueryPropEle + jqueryObjEle + '</tr>';
+	    }
+	    temp += '<tr><td>' + arr1.length + '</td><td>'+arr2.length+'</td><td>'+arr3.length+'</td></tr>';
+	    tbody.append(temp);
+    });
 
-    //    console.log(typeof $);
-    //    console.log(typeof jqueryObj);
-    //    console.log($().constructor === $);
 
 </script>
 </html>
