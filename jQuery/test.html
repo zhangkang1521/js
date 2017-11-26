@@ -13,15 +13,19 @@
     </style>
 </head>
 <body>
-    <div id="test" style="margin-left: 5px; padding-left: 3px; margin-top: 20px"></div>
-    <div></div>
-    <table><tr><td style='padding:0;border:0;display:none'></td><td>t</td></tr></table>
 </body>
 <script>
-    $(function () {
-    	var div = $("#test");
-	    console.log(div.offset());
-    });
 
+    var input = document.createElement("input");
+    input.setAttribute("type", "checkbox");
+    input.setAttribute("checked", "checked");
+    console.log(input.checked);
+
+//    var div = document.createElement("div");
+//    div.appendChild(input);
+
+//    var frag = document.createDocumentFragment();
+    document.body.appendChild(input);
+    console.log(input.checked);
 </script>
 </html>

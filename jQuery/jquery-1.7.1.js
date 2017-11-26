@@ -1399,7 +1399,7 @@
 
 			// Make sure that a selected-by-default option has a working selected property.
 			// (WebKit defaults to false instead of true, IE too, if it's in an optgroup)
-			optSelected: opt.selected,
+			optSelected: opt.selected, // 默认选中的option是否为selected
 
 			// Test setAttribute on camelCase class. If it works, we need attrFixes when doing get/setAttribute (ie6/7)
 			getSetAttribute: div.className !== "t",
@@ -1461,7 +1461,7 @@
 		fragment.appendChild( div.lastChild );
 
 		// WebKit doesn't clone checked state correctly in fragments
-		support.checkClone = fragment.cloneNode( true ).cloneNode( true ).lastChild.checked;
+		support.checkClone = fragment.cloneNode( true ).cloneNode( true ).lastChild.checked; // 复制checkbox是否会复制选中状态
 
 		// Check if a disconnected checkbox will retain its checked
 		// value of true after appended to the DOM (IE6/7)
@@ -6252,7 +6252,7 @@
 			// Return the cloned set
 			return clone;
 		},
-
+		// 把html转换成dom元素
 		clean: function( elems, context, fragment, scripts ) {
 			var checkScriptType;
 
