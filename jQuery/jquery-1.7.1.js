@@ -1377,7 +1377,7 @@
 
 			// Get the style information from getAttribute
 			// (IE uses .cssText instead)
-			style: /top/.test( a.getAttribute("style") ),
+			style: /top/.test( a.getAttribute("style") ), // ie使用element.style.cssText
 
 			// Make sure that URLs aren't manipulated
 			// (IE normalizes it by default)
@@ -1390,7 +1390,7 @@
 
 			// Verify style float existence
 			// (IE uses styleFloat instead of cssFloat)
-			cssFloat: !!a.style.cssFloat,
+			cssFloat: !!a.style.cssFloat, // ie使用a.style.styleFloat
 
 			// Make sure that if no value is specified for a checkbox
 			// that it defaults to "on".
@@ -1535,7 +1535,7 @@
 
 			container = document.createElement("div");
 			container.style.cssText = vb + "width:0;height:0;position:static;top:0;margin-top:" + conMarginTop + "px";
-			body.insertBefore( container, body.firstChild );
+			body.insertBefore( container, body.firstChild ); // 插入到文档
 
 			// Construct the test element
 			div = document.createElement("div");
@@ -1562,7 +1562,7 @@
 			// Figure out if the W3C box model works as expected
 			div.innerHTML = "";
 			div.style.width = div.style.paddingLeft = "1px";
-			jQuery.boxModel = support.boxModel = div.offsetWidth === 2; // 是否支持盒模型
+			jQuery.boxModel = support.boxModel = div.offsetWidth === 2; // 是否支持盒模型，可见宽度offsetWidth = width + padding + border, 不支持盒模型width包含padding+border，offsetWidth==width
 
 			if ( typeof div.style.zoom !== "undefined" ) {
 				// Check if natively block-level elements act like inline-block
@@ -1571,13 +1571,13 @@
 				// (IE < 8 does this)
 				div.style.display = "inline";
 				div.style.zoom = 1;
-				support.inlineBlockNeedsLayout = ( div.offsetWidth === 2 );
+				support.inlineBlockNeedsLayout = ( div.offsetWidth === 2 ); // ie<8不支持inline-block，使用display: inline; zoom: 1;代替
 
 				// Check if elements with layout shrink-wrap their children
 				// (IE 6 does this)
 				div.style.display = "";
 				div.innerHTML = "<div style='width:4px;'></div>";
-				support.shrinkWrapBlocks = ( div.offsetWidth !== 2 );
+				support.shrinkWrapBlocks = ( div.offsetWidth !== 2 ); // ie6子元素如果比父元素大，会撑大父元素
 			}
 
 			div.style.cssText = ptlm + vb;
@@ -1588,24 +1588,24 @@
 			td = outer.nextSibling.firstChild.firstChild;
 
 			offsetSupport = {
-				doesNotAddBorder: ( inner.offsetTop !== 5 ),
-				doesAddBorderForTableAndCells: ( td.offsetTop === 5 )
+				doesNotAddBorder: ( inner.offsetTop !== 5 ), // offsetTop是否包含父元素的border
+				doesAddBorderForTableAndCells: ( td.offsetTop === 5 ) // td的offsetTop是否包含table的border，ie中包含
 			};
 
 			inner.style.position = "fixed";
 			inner.style.top = "20px";
 
 			// safari subtracts parent border width here which is 5px
-			offsetSupport.fixedPosition = ( inner.offsetTop === 20 || inner.offsetTop === 15 );
+			offsetSupport.fixedPosition = ( inner.offsetTop === 20 || inner.offsetTop === 15 ); // ie6不支持fixed
 			inner.style.position = inner.style.top = "";
 
 			outer.style.overflow = "hidden";
 			outer.style.position = "relative";
 
-			offsetSupport.subtractsBorderForOverflowNotVisible = ( inner.offsetTop === -5 );
+			offsetSupport.subtractsBorderForOverflowNotVisible = ( inner.offsetTop === -5 ); // overflow:hidden是否减去边框
 			offsetSupport.doesNotIncludeMarginInBodyOffset = ( body.offsetTop !== conMarginTop );
 
-			body.removeChild( container );
+			body.removeChild( container ); // 从文档删除
 			div  = container = null;
 
 			jQuery.extend( support, offsetSupport );

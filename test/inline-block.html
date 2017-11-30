@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>block,inline,inline-block布局</title>
+    <style>
+        * {
+            margin: 0 0;
+            padding: 0 0;
+        }
+        .block {
+            display: block;
+            width: 80px;
+            height: 20px;
+            margin: 5px 15px 20px 30px;
+            padding: 5px 15px 20px 30px;
+        }
+
+        .inline {
+            display: inline;
+            width: 80px;
+            height: 20px;
+            margin: 5px 15px 20px 30px;
+            padding: 5px 15px 20px 30px;
+        }
+
+        /** ie<8 不支持，使用display:inline,zoom:1代替*/
+        .inline-block {
+            display: inline-block;
+            *display: inline; /** ie7能识别星号，其他浏览器不识别 */
+            zoom: 1;
+            width: 80px;
+            height: 20px;
+            margin: 5px 15px 20px 30px;
+            padding: 5px 15px 20px 30px;
+        }
+    </style>
+</head>
+<body>
+    <!-- http://www.cnblogs.com/KeithWang/p/3139517.html -->
+    <div>
+
+        <div class="block" style="background-color: red">block</div>
+        <div class="block" style="background-color: green">block</div>
+        <div class="block" style="background-color: blue">block</div>
+    </div>
+
+    <div style="height: 50px">
+        <div class="inline" style="background-color: red">inline</div>
+        <div id="test" class="inline" style="background-color: green">inline</div>
+        <div class="inline" style="background-color: blue">inline</div>
+    </div>
+
+    <div>
+        <div class="inline-block" style="background-color: red">inline-block</div>
+        <div class="inline-block" style="background-color: green">inline-block</div>
+        <div class="inline-block" style="background-color: blue">inline-block</div>
+    </div>
+</body>
+<script>
+    var div = document.getElementById("test");
+    console.log(div.offsetWidth);
+</script>
+</html>
