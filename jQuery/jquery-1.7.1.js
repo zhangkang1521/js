@@ -1412,9 +1412,9 @@
 			html5Clone: document.createElement("nav").cloneNode( true ).outerHTML !== "<:nav></:nav>",
 
 			// Will be defined later
-			submitBubbles: true,
-			changeBubbles: true,
-			focusinBubbles: false,
+			submitBubbles: true, // onsubmit事件是否冒泡
+			changeBubbles: true, // onchange
+			focusinBubbles: false, // onfocusin
 			deleteExpando: true,
 			noCloneEvent: true,
 			inlineBlockNeedsLayout: false,
@@ -1443,7 +1443,7 @@
 			div.attachEvent( "onclick", function() {
 				// Cloning a node shouldn't copy over any
 				// bound event handlers (IE does this)
-				support.noCloneEvent = false;
+				support.noCloneEvent = false; // ie会复制事件
 			});
 			div.cloneNode( true ).fireEvent( "onclick" );
 		}
@@ -1493,7 +1493,7 @@
 		// are used, namely in IE. Short-circuiting here helps us to
 		// avoid an eval call (in setAttribute) which can cause CSP
 		// to go haywire. See: https://developer.mozilla.org/en/Security/CSP
-		if ( div.attachEvent ) {
+		if ( div.attachEvent ) { // ie<=8
 			for( i in {
 				submit: 1,
 				change: 1,
@@ -8039,7 +8039,7 @@
 	(function( xhr ) {
 		jQuery.extend( jQuery.support, {
 			ajax: !!xhr,
-			cors: !!xhr && ( "withCredentials" in xhr )
+			cors: !!xhr && ( "withCredentials" in xhr ) // 是否支持跨域，不支持使用jsonp
 		});
 	})( jQuery.ajaxSettings.xhr() );
 

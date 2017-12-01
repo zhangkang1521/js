@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ajax</title>
+</head>
+<body>
+
+</body>
+<script>
+//	console.log(window.XMLHttpRequest);
+//	console.log(window.ActiveXObject);
+
+	var xhttp;
+	if (window.XMLHttpRequest) {
+		xhttp = new XMLHttpRequest();
+    } else if (window.ActiveXObject) {
+		xhttp = ActiveXObject("Microsoft.XMLHTTP"); // ie6
+    }
+//	xhttp.withCredentials = true;
+
+	xhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {
+			console.log(this);
+			console.log(this.responseText);
+		}
+	};
+	xhttp.open("GET", "http://localhost:9999", true); // open(method, url, async)
+	xhttp.send();
+    console.log('ok!');
+
+</script>
+</html>
