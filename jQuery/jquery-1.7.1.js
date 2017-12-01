@@ -2447,7 +2447,7 @@
 			height: true,
 			offset: true
 		},
-
+		// 获取或设置dom元素html属性
 		attr: function( elem, name, value, pass ) {
 			var ret, hooks, notxml,
 				nType = elem.nodeType;
@@ -2471,7 +2471,7 @@
 			// All attributes are lowercase
 			// Grab necessary hook if one is defined
 			if ( notxml ) {
-				name = name.toLowerCase();
+				name = name.toLowerCase(); // 属性全是小写
 				hooks = jQuery.attrHooks[ name ] || ( rboolean.test( name ) ? boolHook : nodeHook );
 			}
 
