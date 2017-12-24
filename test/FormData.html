@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>FormData</title>
+</head>
+<body>
+    <input type="file" name="myFile" id="myFile"/>
+    <button onclick="submit();">submit</button>
+</body>
+<script>
+    function submit() {
+        var formData = new FormData();
+
+        formData.append("username", "Groucho");
+
+        // HTML 文件类型input，由用户选择
+        var file = document.getElementById("myFile");
+        console.log(file);
+        formData.append("myFile", file.files[0]);
+
+        var request = new XMLHttpRequest();
+        request.open("POST", "http://localhost:9999/spring-boot/user/upload2");
+        request.send(formData);
+    }
+
+</script>
+</html>
