@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>test</title>
+    <script src="jquery-1.7.1.js"></script>
+
+</head>
+<body>
+<input type="checkbox" id="myCheck" checked="checked"/>
+<button onclick="test()">test</button>
+</body>
+<script>
+
+    function test() {
+        // 优先使用prop，prop是dom元素的最新状态
+        var ch = document.getElementById("myCheck");
+        console.log('getAttribute:', ch.getAttribute("checked"));
+        console.log('dom property:', ch.checked);
+//       console.log('attr:', $.attr(ch, "checked"));
+//       console.log('prop', $.prop(ch, "checked"));
+    }
+</script>
+</html>

@@ -2209,10 +2209,10 @@
 							elem.className = value;
 
 						} else {
-							setClass = " " + elem.className + " ";
+							setClass = " " + elem.className + " "; // 技巧在加上空格
 
 							for ( c = 0, cl = classNames.length; c < cl; c++ ) {
-								if ( !~setClass.indexOf( " " + classNames[ c ] + " " ) ) {
+								if ( !~setClass.indexOf( " " + classNames[ c ] + " " ) ) { // !~-1 满足条件
 									setClass += classNames[ c ] + " ";
 								}
 							}
@@ -2244,7 +2244,7 @@
 						if ( value ) {
 							className = (" " + elem.className + " ").replace( rclass, " " );
 							for ( c = 0, cl = classNames.length; c < cl; c++ ) {
-								className = className.replace(" " + classNames[ c ] + " ", " ");
+								className = className.replace(" " + classNames[ c ] + " ", " "); // 移除class
 							}
 							elem.className = jQuery.trim( className );
 
@@ -2286,7 +2286,7 @@
 				} else if ( type === "undefined" || type === "boolean" ) {
 					if ( this.className ) {
 						// store className if set
-						jQuery._data( this, "__className__", this.className );
+						jQuery._data( this, "__className__", this.className ); // $("#id").toggleClass(); value没有传参，记录className
 					}
 
 					// toggle whole className
@@ -2301,7 +2301,7 @@
 				l = this.length;
 			for ( ; i < l; i++ ) {
 				if ( this[i].nodeType === 1 && (" " + this[i].className + " ").replace(rclass, " ").indexOf( className ) > -1 ) {
-					return true;
+					return true; // 在className中找到了，包含class
 				}
 			}
 
@@ -2320,7 +2320,7 @@
 						return ret;
 					}
 
-					ret = elem.value;
+					ret = elem.value; // 返回value
 
 					return typeof ret === "string" ?
 						// handle most common string cases
@@ -2362,7 +2362,7 @@
 
 				// If set returns undefined, fall back to normal setting
 				if ( !hooks || !("set" in hooks) || hooks.set( this, val, "value" ) === undefined ) {
-					this.value = val;
+					this.value = val; // 设值
 				}
 			});
 		}
@@ -2379,12 +2379,12 @@
 				}
 			},
 			select: {
-				get: function( elem ) {
+				get: function( elem ) { // select在多选的时候，elem.value只获取了第一个选中的值
 					var value, i, max, option,
 						index = elem.selectedIndex,
 						values = [],
 						options = elem.options,
-						one = elem.type === "select-one";
+						one = elem.type === "select-one"; // 是否是多选
 
 					// Nothing was selected
 					if ( index < 0 ) {
@@ -2422,9 +2422,9 @@
 					return values;
 				},
 
-				set: function( elem, value ) {
+				set: function( elem, value ) { // select直接设置elem.value不会选中对应的option
 					var values = jQuery.makeArray( value );
-
+					// 遍历option，如果值与value相等，就选中
 					jQuery(elem).find("option").each(function() {
 						this.selected = jQuery.inArray( jQuery(this).val(), values ) >= 0;
 					});
@@ -2472,7 +2472,7 @@
 			// Grab necessary hook if one is defined
 			if ( notxml ) {
 				name = name.toLowerCase(); // 属性全是小写
-				hooks = jQuery.attrHooks[ name ] || ( rboolean.test( name ) ? boolHook : nodeHook );
+				hooks = jQuery.attrHooks[ name ] || ( rboolean.test( name ) ? boolHook : nodeHook ); // boolHook 2644
 			}
 
 			if ( value !== undefined ) {
@@ -2482,7 +2482,7 @@
 					return;
 
 				} else if ( hooks && "set" in hooks && notxml && (ret = hooks.set( elem, value, name )) !== undefined ) {
-					return ret;
+					return ret; // 优先使用修正函数
 
 				} else {
 					elem.setAttribute( name, "" + value );
@@ -2490,7 +2490,7 @@
 				}
 
 			} else if ( hooks && "get" in hooks && notxml && (ret = hooks.get( elem, name )) !== null ) {
-				return ret;
+				return ret; // 优先使用修正函数
 
 			} else {
 
@@ -2615,7 +2615,7 @@
 					return ret;
 
 				} else {
-					return elem[ name ];
+					return elem[ name ]; // 获取dom属性
 				}
 			}
 		},
@@ -2640,7 +2640,7 @@
 // Add the tabIndex propHook to attrHooks for back-compat (different case is intentional)
 	jQuery.attrHooks.tabindex = jQuery.propHooks.tabIndex;
 
-// Hook for boolean attributes
+// Hook for boolean attributes bool类型，如checked，get/set修正函数
 	boolHook = {
 		get: function( elem, name ) {
 			// Align boolean attributes with corresponding properties
@@ -2648,7 +2648,7 @@
 			var attrNode,
 				property = jQuery.prop( elem, name );
 			return property === true || typeof property !== "boolean" && ( attrNode = elem.getAttributeNode(name) ) && attrNode.nodeValue !== false ?
-				name.toLowerCase() :
+				name.toLowerCase() : // checked property是true，这里返回checked
 				undefined;
 		},
 		set: function( elem, value, name ) {
@@ -2662,10 +2662,10 @@
 				propName = jQuery.propFix[ name ] || name;
 				if ( propName in elem ) {
 					// Only set the IDL specifically if it already exists on the element
-					elem[ propName ] = true;
+					elem[ propName ] = true; // dom属性
 				}
 
-				elem.setAttribute( name, name.toLowerCase() );
+				elem.setAttribute( name, name.toLowerCase() ); // html属性，标准写法是 checked="checked"
 			}
 			return name;
 		}
