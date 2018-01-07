@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>ajax</title>
+	<title>ajax</title>
 </head>
 <body>
 
@@ -25,7 +25,7 @@
 			console.log(this.responseText);
 		}
 	};
-	xhttp.open("GET", "http://localhost:9999", true); // open(method, url, async)
+	xhttp.open("GET", "http://localhost:9999/spring-boot/user/1", false); // open(method, url, async)
 	xhttp.send();
     console.log('ok!');
 

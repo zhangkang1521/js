@@ -2,37 +2,27 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>test</title>
+    <title>代理事件</title>
     <script src="jquery-1.7.1.js"></script>
     <!--<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.1.js"></script>-->
 </head>
 <body>
     <button onclick="add()">动态添加元素</button>
     <div id="myDiv" style="width: 500px; height: 500px; border: 1px solid red">
-        <div id="a" class="b" style="width: 50px; height: 50px; border: 1px solid green"></div>
-        <div id="b" class="b" style="width: 50px; height: 50px; border: 1px solid cyan"></div>
+        <div class="b" style="width: 50px; height: 50px; border: 1px solid green"></div>
+        <div class="b" style="width: 50px; height: 50px; border: 1px solid cyan"></div>
         <div class="c" style="width: 50px; height: 50px; border: 1px solid black"></div>
     </div>
 </body>
 <script>
     // 使用代理事件，动态新增的元素也会绑定上事件
-    var myDiv = $("#myDiv");
-    myDiv.on("click", a);
+    $("#myDiv").on("click", ".b", btnClick);
 
-    function a(event) {
-        // console.log($(this));
-        // console.log(event);
-        console.log('a');
-    }
-
-    function b() {
-        console.log('b or c');
+    function btnClick() {
+        console.log('btn click');
     }
 
     console.log($.cache);
-
-    // $("#a").trigger("click.c");
-    // $("#myDiv").off("click.c");
 
     function add() {
         var newDiv = $(".b").first().clone();
@@ -40,9 +30,9 @@
     }
 
     // 新增的元素，不会触发事件
-    // $("#myDiv .b").bind("click", function(){
-    //     console.log('bind click');
-    // });
+    $("#myDiv .b").bind("click", function(){
+        console.log('bind click');
+    });
 
    
 

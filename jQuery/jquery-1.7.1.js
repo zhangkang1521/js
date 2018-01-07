@@ -2844,7 +2844,7 @@
 			var elemData, eventHandle, events,
 				t, tns, type, namespaces, handleObj,
 				handleObjIn, quick, handlers, special;
-
+			// elemData 指向数据缓存
 			// Don't attach events to noData or text/comment nodes (allow plain objects tho)
 			if ( elem.nodeType === 3 || elem.nodeType === 8 || !types || !handler || !(elemData = jQuery._data( elem )) ) {
 				return;
@@ -2867,7 +2867,7 @@
 				elemData.events = events = {};
 			}
 			eventHandle = elemData.handle;
-			if ( !eventHandle ) {
+			if ( !eventHandle ) { // 主监听函数
 				elemData.handle = eventHandle = function( e ) {
 					// Discard the second event of a jQuery.event.trigger() and
 					// when an event is called after a page has unloaded
