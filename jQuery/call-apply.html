@@ -8,6 +8,19 @@
 
 </body>
 <script>
+
+	// 实例1 foo.call(this, arg1,arg2,arg3) == foo.apply(this, arguments)==this.foo(arg1, arg2, arg3)
+	// 当参数明确时可用call, 当参数不明确时可用apply给合arguments
+	function test(){
+		console.log(arguments);
+	}
+
+	test.apply(this, ['a', 'b']);
+	test.call(this, 'a', 'b');
+
+
+
+	// 实例2
 	function Person(name) {
 		this.name = name;
 	};
@@ -29,10 +42,5 @@
 	Person.prototype.sayHello.call(p2, 1, 2); // 改变this
 	Person.prototype.sayHello.apply(p2, [3,[4]]); // 改变this，必须传数组
 
-
-    // 二维数组降为一维数组
-	var ret = [1, 2, [33, 44]];
-	console.log(ret.concat.apply([], ret)); // 一维数组，这里很巧妙
-	console.log([].concat(ret)); // 二维数组
 </script>
 </html>

@@ -2867,7 +2867,7 @@
 				elemData.events = events = {};
 			}
 			eventHandle = elemData.handle;
-			if ( !eventHandle ) { // 主监听函数
+			if ( !eventHandle ) { // 主监听函数，所有类型事件都走主监听函数dispatch
 				elemData.handle = eventHandle = function( e ) {
 					// Discard the second event of a jQuery.event.trigger() and
 					// when an event is called after a page has unloaded
@@ -2919,7 +2919,7 @@
 					if ( !special.setup || special.setup.call( elem, data, namespaces, eventHandle ) === false ) {
 						// Bind the global event handler to the element
 						if ( elem.addEventListener ) {
-							elem.addEventListener( type, eventHandle, false );
+							elem.addEventListener( type, eventHandle, false ); // 绑定主监听函数到元素上
 
 						} else if ( elem.attachEvent ) {
 							elem.attachEvent( "on" + type, eventHandle );
@@ -3704,11 +3704,11 @@
 				return this;
 			}
 
-			if ( one === 1 ) {
+			if ( one === 1 ) { // 绑定一次性函数，将fn替换掉
 				origFn = fn;
 				fn = function( event ) {
 					// Can use an empty set, since event contains the info
-					jQuery().off( event );
+					jQuery().off( event ); // 执行函数前，将函数移除，这样保证只执行一次
 					return origFn.apply( this, arguments );
 				};
 				// Use same guid so caller can remove using origFn
