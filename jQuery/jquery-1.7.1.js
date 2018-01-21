@@ -2805,7 +2805,7 @@
 
 
 	var rformElems = /^(?:textarea|input|select)$/i,
-		rtypenamespace = /^([^\.]*)?(?:\.(.+))?$/,
+		rtypenamespace = /^([^\.]*)?(?:\.(.+))?$/, // type, namespace 分组正则
 		rhoverHack = /\bhover(\.\S+)?\b/,
 		rkeyEvent = /^key/,
 		rmouseEvent = /^(?:mouse|contextmenu)|click/,
@@ -2884,7 +2884,7 @@
 			types = jQuery.trim( hoverHack(types) ).split( " " );
 			for ( t = 0; t < types.length; t++ ) {
 
-				tns = rtypenamespace.exec( types[t] ) || [];
+				tns = rtypenamespace.exec( types[t] ) || []; // 将type和namespace分组
 				type = tns[1];
 				namespaces = ( tns[2] || "" ).split( "." ).sort();
 
@@ -2911,7 +2911,7 @@
 
 				// Init the event handler queue if we're the first
 				handlers = events[ type ];
-				if ( !handlers ) {
+				if ( !handlers ) { // 如果是第一次绑定该类型的事件
 					handlers = events[ type ] = [];
 					handlers.delegateCount = 0;
 
@@ -3681,7 +3681,7 @@
 				}
 				return this;
 			}
-
+			// 参数修正，可选参数
 			if ( data == null && fn == null ) {
 				// ( types, fn )
 				fn = selector;
@@ -3699,7 +3699,7 @@
 				}
 			}
 			if ( fn === false ) {
-				fn = returnFalse;
+				fn = returnFalse; // 绑定的函数是false，修正为返回false的函数, line:3465
 			} else if ( !fn ) {
 				return this;
 			}

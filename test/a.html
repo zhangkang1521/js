@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>a</title>
+</head>
+
+<body>
+    <a href="b.html">b</a>
+    <input type="text" />
+</body>
+<script>
+    // alert('a');
+    window.addEventListener("pageshow", function (event) {
+        console.log('pageshow');
+        // window.performance.navigation.type，直接加载页面是1，回退是2
+        var historyTraversal = event.persisted || (typeof window.performance != "undefined" && window.performance.navigation.type === 2);
+        if (historyTraversal) {
+            // Handle page restore.
+            window.location.reload();
+            console.log('reload');
+        }
+    });
+</script>
+
+</html>
