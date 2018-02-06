@@ -2886,7 +2886,7 @@
 
 				tns = rtypenamespace.exec( types[t] ) || []; // 将type和namespace分组
 				type = tns[1];
-				namespaces = ( tns[2] || "" ).split( "." ).sort();
+				namespaces = ( tns[2] || "" ).split( "." ).sort(); // 排序好再存储，在off的时候好判断namespace
 
 				// If event changes its type, use the special event handlers for the changed type
 				special = jQuery.event.special[ type ] || {};
@@ -2937,7 +2937,7 @@
 
 				// Add to the element's handler list, delegates in front
 				if ( selector ) {
-					handlers.splice( handlers.delegateCount++, 0, handleObj );
+					handlers.splice( handlers.delegateCount++, 0, handleObj ); // 代理事件，添加到最前面，在dispatch时区分代理非代理事件有方便之处
 				} else {
 					handlers.push( handleObj );
 				}
@@ -2982,17 +2982,17 @@
 				type = ( selector? special.delegateType : special.bindType ) || type;
 				eventType = events[ type ] || [];
 				origCount = eventType.length;
-				namespaces = namespaces ? new RegExp("(^|\\.)" + namespaces.split(".").sort().join("\\.(?:.*\\.)?") + "(\\.|$)") : null;
-
+				namespaces = namespaces ? new RegExp("(^|\\.)" + namespaces.split(".").sort().join("\\.(?:.*\\.)?") + "(\\.|$)") : null; // 这里排序了
+			
 				// Remove matching events
 				for ( j = 0; j < eventType.length; j++ ) {
 					handleObj = eventType[ j ];
-
+					
 					if ( ( mappedTypes || origType === handleObj.origType ) &&
 						( !handler || handler.guid === handleObj.guid ) &&
-						( !namespaces || namespaces.test( handleObj.namespace ) ) &&
+						( !namespaces || namespaces.test( handleObj.namespace ) ) && // 命名空间移除规则
 						( !selector || selector === handleObj.selector || selector === "**" && handleObj.selector ) ) {
-						eventType.splice( j--, 1 );
+						eventType.splice( j--, 1 ); // 移除事件
 
 						if ( handleObj.selector ) {
 							eventType.delegateCount--;
@@ -3007,7 +3007,7 @@
 				// (avoids potential for endless recursion during removal of special event handlers)
 				if ( eventType.length === 0 && origCount !== eventType.length ) {
 					if ( !special.teardown || special.teardown.call( elem, namespaces ) === false ) {
-						jQuery.removeEvent( elem, type, elemData.handle );
+						jQuery.removeEvent( elem, type, elemData.handle ); // 该类型的事件全部移除，取消绑定
 					}
 
 					delete events[ type ];
@@ -3023,7 +3023,7 @@
 
 				// removeData also checks for emptiness and clears the expando if empty
 				// so use it instead of delete
-				jQuery.removeData( elem, [ "events", "handle" ], true );
+				jQuery.removeData( elem, [ "events", "handle" ], true ); // 所有事件都移除了，将事件数据全部删除，移除主监听函数
 			}
 		},
 
@@ -3200,10 +3200,10 @@
 			// Use the fix-ed jQuery.Event rather than the (read-only) native event
 			args[0] = event;
 			event.delegateTarget = this;
-
+			
 			// Determine handlers that should run if there are delegated events
 			// Avoid disabled elements in IE (#6911) and non-left-click bubbling in Firefox (#3861)
-			if ( delegateCount && !event.target.disabled && !(event.button && event.type === "click") ) {
+			if ( delegateCount && !event.target.disabled && !(event.button && event.type === "click") ) { // 代理事件
 
 				// Pregenerate a single jQuery object for reuse with .is()
 				jqcur = jQuery(this);
@@ -3233,7 +3233,7 @@
 			}
 
 			// Add the remaining (directly-bound) handlers
-			if ( handlers.length > delegateCount ) {
+			if ( handlers.length > delegateCount ) { // 非代理事件，代理事件的放在最前面
 				handlerQueue.push({ elem: this, matches: handlers.slice( delegateCount ) });
 			}
 
